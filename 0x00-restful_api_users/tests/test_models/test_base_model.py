@@ -20,6 +20,11 @@ class TestBaseModel(unittest.TestCase):
     def test_id(self):
         self.assertIsInstance(self.base_model.id, str)
 
+    def test_unique_id(self):
+        id_1 = BaseModel().id
+        id_2 = BaseModel().id
+        self.assertNotEqual(id_1, id_2)
+
     def test_created_at(self):
         self.assertIsInstance(self.base_model.created_at, datetime)
 
