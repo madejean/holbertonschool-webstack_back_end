@@ -5,8 +5,9 @@ from models.base_model import Base
 from models.base_model import BaseModel
 from sqlalchemy import Column, String
 
+
 class User(BaseModel, Base):
-    __tablename__  = 'users'
+    __tablename__ = 'users'
     email = Column(String(128), nullable=False)
     first_name = Column(String(128))
     last_name = Column(String(128))
@@ -26,7 +27,11 @@ class User(BaseModel, Base):
             self._password = m.hexdigest().lower()
 
     def display_name(self):
-        if self.email is None and self.first_name is None and self.last_name is None:
+        if self.email is None:
+            return ""
+        if self.first_name is None:
+            return ""
+        if self.last_name is None:
             return ""
         if self.first_name is None and self.last_name is None:
             return self.email
@@ -38,7 +43,10 @@ class User(BaseModel, Base):
             return("{} {}".format(self.first_name, self.last_name))
 
     def __str__(self):
-        return("[User] {} - {} - {}".format(self.id, self.email, self.display_name()))
+        return("[User] {} - {} - {}".format(
+            self.id, self.email, self.display_name()
+            )
+        )
 
     def is_valid_password(self, pwd):
         if pwd is None or not isinstance(pwd, str) or self._password is None:
@@ -57,7 +65,13 @@ class User(BaseModel, Base):
             "email": str(self.email),
             "first_name": str(self.first_name),
             "last_name": str(self.last_name),
-            "created_at": str(datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S")),
-            "updated_at": str(datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"))
+            "created_at": str(datetime.strftime(
+                self.created_at, "%Y-%m-%d %H:%M:%S"
+                )
+            ),
+            "updated_at": str(datetime.strftime(
+                self.updated_at, "%Y-%m-%d %H:%M:%S"
+                )
+            )
         }
         return d_user
