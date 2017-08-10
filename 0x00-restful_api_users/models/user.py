@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 import hashlib
 from datetime import datetime
+<<<<<<< HEAD
 from models.base_model import Base
 from models.base_model import BaseModel
+=======
+from models.base_model import BaseModel, Base
+>>>>>>> 8f86ee2c8f668c5620f6997bc923176e9146c650
 from sqlalchemy import Column, String
 
 class User(BaseModel, Base):
@@ -33,7 +37,7 @@ class User(BaseModel, Base):
         if self.last_name is None:
             return self.first_name
         if self.first_name is None:
-            print self.last_name
+            return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
@@ -44,7 +48,7 @@ class User(BaseModel, Base):
         if pwd is None or not isinstance(pwd, str) or self._password is None:
             return False
         m = hashlib.md5()
-        m.update(pwd)
+        m.update(pwd.encode('utf-8'))
         md5_pwd = m.hexdigest().lower()
         if md5_pwd == self._password:
             return True
