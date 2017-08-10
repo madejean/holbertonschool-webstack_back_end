@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 import hashlib
 from datetime import datetime
-from base_model import BaseModel
-from base_model import Base
+from models.base_model import Base
+from models.base_model import BaseModel
 from sqlalchemy import Column, String
 
 class User(BaseModel, Base):
     __tablename__  = 'users'
     email = Column(String(128), nullable=False)
-    first_name = Column(String(128), nullable=False)
-    last_name = Column(String(128), nullable=False)
+    first_name = Column(String(128))
+    last_name = Column(String(128))
     _password = Column(String(128), nullable=False)
 
     @property
@@ -22,9 +22,8 @@ class User(BaseModel, Base):
             self._password = None
         else:
             m = hashlib.md5()
-            m.update(password)
-            password = m.hexdigest().lower()
-            self._password = password
+            m.update(password.encode('utf-8'))
+            self._password = m.hexdigest().lower()
 
     def display_name(self):
         if self.email is None and self.first_name is None and self.last_name is None:
