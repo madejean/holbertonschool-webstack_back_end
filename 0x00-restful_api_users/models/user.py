@@ -33,7 +33,7 @@ class User(BaseModel, Base):
         if self.last_name is None:
             return self.first_name
         if self.first_name is None:
-            print self.last_name
+            return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
