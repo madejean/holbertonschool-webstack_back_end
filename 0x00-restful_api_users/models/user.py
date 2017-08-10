@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""User model"""
 import hashlib
 from datetime import datetime
 from models.base_model import Base
@@ -13,10 +14,12 @@ class User(BaseModel, Base):
     last_name = Column(String(128))
     _password = Column(String(128), nullable=False)
 
+    """password getter"""
     @property
     def password(self):
         return self._password
 
+    """password setter"""
     @password.setter
     def password(self, password):
         if password is None or not isinstance(password, str):
@@ -26,6 +29,7 @@ class User(BaseModel, Base):
             m.update(password.encode('utf-8'))
             self._password = m.hexdigest().lower()
 
+    """displays the full name of an User instance"""
     def display_name(self):
         if self.email is None:
             return ""
@@ -42,12 +46,14 @@ class User(BaseModel, Base):
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
+    """reformats in a more readable way"""
     def __str__(self):
         return("[User] {} - {} - {}".format(
             self.id, self.email, self.display_name()
             )
         )
 
+    """validates password"""
     def is_valid_password(self, pwd):
         if pwd is None or not isinstance(pwd, str) or self._password is None:
             return False
@@ -59,6 +65,7 @@ class User(BaseModel, Base):
         else:
             return False
 
+    """serialize User"""
     def to_dict(self):
         d_user = {
             "id": str(self.id),
