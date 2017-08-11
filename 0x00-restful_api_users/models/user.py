@@ -55,7 +55,7 @@ class User(BaseModel, Base):
         if pwd is None or not isinstance(pwd, str) or self._password is None:
             return False
         m = hashlib.md5()
-        m.update(pwd)
+        m.update(pwd.encode('utf-8'))
         md5_pwd = m.hexdigest().lower()
         if md5_pwd == self._password:
             return True
