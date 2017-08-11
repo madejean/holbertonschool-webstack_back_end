@@ -38,7 +38,7 @@ class User(BaseModel, Base):
             return self.email
         if not self.last_name:
             return self.first_name
-        if not self.first_name:
+        if self.first_name is None:
             return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))

@@ -14,22 +14,31 @@ class TestUser(unittest.TestCase):
     def test_no_name_display(self):
         self.assertIs(self.user.display_name(), "")
 
+    """testing email value display"""
     def test_email_display(self):
         self.user.email = "hbtn@holbertonschool.com"
         self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
 
+    """testing first name value display"""
     def test_firstname_display(self):
         self.user.first_name = "Bob"
         self.assertIs(self.user.display_name(), "Bob")
 
+    """testing last name value display"""
+    def test_lastname_display(self):
+        self.user.email = "test@hotmail.com"
+        self.user.last_name = "Dylan"
+        self.assertEqual(self.user.display_name(), "Dylan")
+
+    """testing full name value display"""
     def test_fullname_display(self):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Bob Dylan")
+        self.assertEqual(self.user.display_name(), "{} {}".format(self.user.first_name, self.user.last_name))
 
-    """testing displays reformatted user info"""
+    """testing reformatted user info display"""
     def test__str__(self):
-        user = User()
+        self.assertEqual(self.user.__str__(), "[User] {} - {} - {}".format(self.user.id, self.user.email, self.user.display_name()))
 
     """testing password value"""
     def test_password(self):
