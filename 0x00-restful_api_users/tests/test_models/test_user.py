@@ -7,6 +7,7 @@ from models.user import User
 
 
 class TestUser(unittest.TestCase):
+    """setUp user instance"""
     def setUp(self):
         self.user = User()
 
