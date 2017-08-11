@@ -26,3 +26,11 @@ class TestUser(unittest.TestCase):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
         self.assertEqual(self.user.display_name(), "Bob Dylan")
+
+    """testing displays reformatted user info"""
+    def test__str__(self):
+        user = User()
+
+    """testing password value"""
+    def test_password(self):
+        user = User()
