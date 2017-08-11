@@ -56,8 +56,17 @@ class TestUser(unittest.TestCase):
         self.user.password = "hello"
         self.assertEqual(self.user.password, "5d41402abc4b2a76b9719d911017c592")
 
-    """testing password validatin"""
-    def test_is_valid_password(self):
+    """testing password None"""
+    def test_is_valid_password_none(self):
+        self.assertFalse(self.user.is_valid_password(None))
+
+    """testing false password"""
+    def test_password_is_not_valid(self):
+        self.assertFalse(self.user.is_valid_password(89))
+        self.assertFalse(self.user.is_valid_password("tutu1234"))
+
+    """testing valid password"""
+    def test_password_is_valid(self):
         self.user.email = "hbtn@holbertonschool.com"
         self.user.password = "toto1234"
-        self.assertFalse(self.user.is_valid_password(None))
+        self.assertTrue(self.user.is_valid_password("toto1234"))
