@@ -5,6 +5,7 @@ import hashlib
 from models.base_model import BaseModel
 from models.user import User
 
+
 class TestUser(unittest.TestCase):
     """testing displays fullname of user"""
     def test_name_display(self):
