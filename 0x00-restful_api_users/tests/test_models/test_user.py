@@ -35,10 +35,7 @@ class TestUser(unittest.TestCase):
     def test_fullname_display(self):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(
-            self.user.display_name(),
-            "{} {}".format(self.user.first_name, self.user.last_name)
-        )
+        self.assertEqual(self.user.display_name(), "Bob Dylan")
 
     """testing reformatted user info display"""
     def test__str__(self):
