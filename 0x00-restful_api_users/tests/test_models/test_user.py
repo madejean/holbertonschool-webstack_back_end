@@ -35,11 +35,21 @@ class TestUser(unittest.TestCase):
     def test_fullname_display(self):
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "{} {}".format(self.user.first_name, self.user.last_name))
+        self.assertEqual(
+            self.user.display_name(),
+            "{} {}".format(self.user.first_name, self.user.last_name)
+        )
 
     """testing reformatted user info display"""
     def test__str__(self):
-        self.assertEqual(self.user.__str__(), "[User] {} - {} - {}".format(self.user.id, self.user.email, self.user.display_name()))
+        self.assertEqual(
+            self.user.__str__(),
+            "[User] {} - {} - {}".format(
+                self.user.id,
+                self.user.email,
+                self.user.display_name()
+            )
+        )
 
     """testing password value"""
     def test_password(self):
