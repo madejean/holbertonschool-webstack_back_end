@@ -34,11 +34,11 @@ class User(BaseModel, Base):
     def display_name(self):
         if not self.email and not self.first_name and not self.first_name:
             return ""
-        if self.first_name is None and self.last_name is None:
+        if not self.first_name and not self.last_name:
             return self.email
-        if self.last_name is None:
+        if not self.last_name:
             return self.first_name
-        if self.first_name is None:
+        if not self.first_name:
             return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))
