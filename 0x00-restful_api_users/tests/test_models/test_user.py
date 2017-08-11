@@ -2,7 +2,6 @@
 """Unittest for User model"""
 import unittest
 import hashlib
-from models.base_model import BaseModel
 from models.user import User
 
 
@@ -11,7 +10,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         self.user = User()
 
-    """testing displays fullname of user"""
+    """testing displays empty if no user"""
     def test_no_name_display(self):
         self.assertIs(self.user.display_name(), "")
 
@@ -48,6 +47,11 @@ class TestUser(unittest.TestCase):
             )
         )
 
+    """testing empty password"""
+    def test_no_password(self):
+        self.assertIsNone(self.user.password)
+        
     """testing password value"""
     def test_password(self):
-        user = User()
+        self.user.password = "hello"
+        self.assertEqual(self.user.password, "5d41402abc4b2a76b9719d911017c592")
