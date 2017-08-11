@@ -50,8 +50,14 @@ class TestUser(unittest.TestCase):
     """testing empty password"""
     def test_no_password(self):
         self.assertIsNone(self.user.password)
-        
+
     """testing password value"""
     def test_password(self):
         self.user.password = "hello"
         self.assertEqual(self.user.password, "5d41402abc4b2a76b9719d911017c592")
+
+    """testing password validatin"""
+    def test_is_valid_password(self):
+        self.user.email = "hbtn@holbertonschool.com"
+        self.user.password = "toto1234"
+        self.assertFalse(self.user.is_valid_password(None))
