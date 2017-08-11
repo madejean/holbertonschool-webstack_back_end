@@ -32,13 +32,13 @@ class User(BaseModel, Base):
 
     """displays the full name of an User instance"""
     def display_name(self):
-        if not self.email and not self.first_name and not self.first_name:
+        if not (self.email or self.first_name or self.first_name):
             return ""
-        elif not self.first_name and not self.last_name:
+        if not (self.first_name or self.last_name):
             return self.email
-        elif not self.last_name:
+        if not self.last_name:
             return self.first_name
-        elif not self.first_name:
+        if not self.first_name:
             return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))
