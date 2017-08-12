@@ -123,31 +123,31 @@ class TestUser(unittest.TestCase):
         """
         testing updated_at in dict
         """
-        self.assertIsInstance(dict["updated_at"], str)
+        self.assertIsInstance(self.d_user["updated_at"], str)
 
 
     def test_to_dict_firstname(self):
         """
         testing first_name in dict
         """
-        self.assertIsInstance(dict["first_name"], str)
+        self.assertIsInstance(self.d_user["first_name"], str)
 
 
     def test_to_dict_email(self):
         """
         testing email in dict
         """
-        self.assertIsInstance(dict["email"], str)
+        self.assertIsInstance(self.d_user["email"], str)
 
     def test_to_dict_lastname(self):
         """
         testing last_name in dict
         """
-        self.assertIsInstance(dict["last_name"], str)
+        self.assertIsInstance(self.d_user["last_name"], str)
 
 
     def test_to_dict_created_at(self):
         """
         testing created_at in dict
         """
-        self.assertIsInstance(dict["created_at"], str)
+        self.assertIsInstance(self.d_user["created_at"], str)
