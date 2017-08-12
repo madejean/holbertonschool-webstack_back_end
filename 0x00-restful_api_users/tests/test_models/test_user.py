@@ -22,14 +22,13 @@ class TestUser(unittest.TestCase):
         self.dict_user.last_name = "Dylan"
         self.d_user = self.dict_user.to_dict()
 
-    # Testing display_name()
     def test_no_value_display(self):
         """
         testing displays empty if no user
         """
         self.assertIs(self.user.display_name(), "")
 
-    # Testing display_name()
+
     def test_email_display(self):
         """
         testing email value display
@@ -37,7 +36,6 @@ class TestUser(unittest.TestCase):
         self.user.email = "hbtn@holbertonschool.com"
         self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
 
-    # Testing display_name()
     def test_firstname_display(self):
         """
         testing first name value display
@@ -45,7 +43,6 @@ class TestUser(unittest.TestCase):
         self.user.first_name = "Bob"
         self.assertIs(self.user.display_name(), "Bob")
 
-    # Testing display_name()
     def test_lastname_display(self):
         """
         testing last name value display
@@ -54,7 +51,6 @@ class TestUser(unittest.TestCase):
         self.user.last_name = "Dylan"
         self.assertIs(self.user.display_name(), "Dylan")
 
-    # Testing display_name()
     def test_fullname_display(self):
         """
         testing full name value display
@@ -123,31 +119,55 @@ class TestUser(unittest.TestCase):
         """
         testing updated_at in dict
         """
-        self.assertIsInstance(self.d_user["updated_at"], str)
-
+        self.assertEqual(
+            "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
+            "updated_at (<class 'str'>)"
+        )
 
     def test_to_dict_firstname(self):
         """
         testing first_name in dict
         """
-        self.assertIsInstance(self.d_user["first_name"], str)
-
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "first_name",
+                type(self.d_user["first_name"]),
+                self.dict_user.first_name
+            ),
+            "first_name (<class 'str'>): Bob"
+        )
 
     def test_to_dict_email(self):
         """
         testing email in dict
         """
-        self.assertIsInstance(self.d_user["email"], str)
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "email",
+                type(self.d_user["email"]),
+                self.dict_user.email
+            ),
+            "email (<class 'str'>): hbtn@holbertonschool.com"
+        )
 
     def test_to_dict_lastname(self):
         """
         testing last_name in dict
         """
-        self.assertIsInstance(self.d_user["last_name"], str)
-
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "last_name",
+                type(self.d_user["last_name"]),
+                self.dict_user.last_name
+            ),
+            "last_name (<class 'str'>): Dylan"
+        )
 
     def test_to_dict_created_at(self):
         """
         testing created_at in dict
         """
-        self.assertIsInstance(self.d_user["created_at"], str)
+        self.assertEqual(
+            "{} ({})".format("created_at", type(self.d_user["created_at"])),
+            "created_at (<class 'str'>)"
+        )
