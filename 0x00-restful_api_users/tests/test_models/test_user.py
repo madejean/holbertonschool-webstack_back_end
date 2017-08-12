@@ -77,11 +77,11 @@ class TestUser(unittest.TestCase):
 
     """testing id in dict"""
     def test_to_dict_id(self):
-        self.user.password = "toto1234"
         self.assertEqual(
             "{} ({})".format("id", type(self.d_user["id"])),
             "id (<class 'str'>)"
         )
+        self.assertIsInstance(self.d_user["id"], str)
 
     """testing updated_at in dict"""
     def test_to_dict_updated_at(self):
