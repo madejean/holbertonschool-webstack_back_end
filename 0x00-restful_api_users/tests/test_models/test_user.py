@@ -172,7 +172,5 @@ class TestUser(unittest.TestCase):
             testing created_at in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual(
-            "{} ({})".format("created_at", type(d_user["created_at"])),
-            "created_at (<class 'str'>)"
+        self.assertEqual("{} ({})".format("created_at", type(d_user["created_at"])), "created_at (<class 'str'>)"
         )
