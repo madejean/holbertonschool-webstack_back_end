@@ -22,13 +22,14 @@ class TestUser(unittest.TestCase):
         self.dict_user.last_name = "Dylan"
         self.d_user = self.dict_user.to_dict()
 
-# Testing display_name()
+    # Testing display_name()
     def test_no_value_display(self):
         """
         testing displays empty if no user
         """
         self.assertIs(self.user.display_name(), "")
 
+    # Testing display_name()
     def test_email_display(self):
         """
         testing email value display
@@ -36,6 +37,7 @@ class TestUser(unittest.TestCase):
         self.user.email = "hbtn@holbertonschool.com"
         self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
 
+    # Testing display_name()
     def test_firstname_display(self):
         """
         testing first name value display
@@ -43,6 +45,7 @@ class TestUser(unittest.TestCase):
         self.user.first_name = "Bob"
         self.assertIs(self.user.display_name(), "Bob")
 
+    # Testing display_name()
     def test_lastname_display(self):
         """
         testing last name value display
@@ -51,6 +54,7 @@ class TestUser(unittest.TestCase):
         self.user.last_name = "Dylan"
         self.assertIs(self.user.display_name(), "Dylan")
 
+    # Testing display_name()
     def test_fullname_display(self):
         """
         testing full name value display
