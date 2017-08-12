@@ -80,6 +80,8 @@ class TestUser(unittest.TestCase):
         self.user.password = "toto1234"
         self.assertTrue(self.user.is_valid_password("toto1234"))
 
+    # Testing user dict
+
     """testing id in dict"""
     def test_to_dict_id(self):
         self.assertEqual(
