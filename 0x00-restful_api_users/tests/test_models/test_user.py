@@ -125,7 +125,7 @@ class TestUser(unittest.TestCase):
         testing id in dict
         """
         self.assertIsInstance(self.d_user["id"], str)
-        
+
     def test_to_dict_updated_at(self):
 
         """
