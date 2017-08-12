@@ -15,7 +15,7 @@ class TestBaseModel(unittest.TestCase):
         self.base_model = BaseModel()
 
     def test_not_none(self):
-        
+
         """
         testing values are not none
         """
