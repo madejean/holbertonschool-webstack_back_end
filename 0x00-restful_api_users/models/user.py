@@ -39,7 +39,7 @@ class User(BaseModel, Base):
             self._password = m.hexdigest().lower()
 
     def display_name(self):
-        
+
         """
         displays the full name of an User instance
         """
