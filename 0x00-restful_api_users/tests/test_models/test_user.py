@@ -85,7 +85,6 @@ class TestUser(unittest.TestCase):
 
     """testing updated_at in dict"""
     def test_to_dict_updated_at(self):
-        """adding comments"""
         self.assertEqual(
             "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
             "updated_at (<class 'str'>)"
@@ -93,7 +92,6 @@ class TestUser(unittest.TestCase):
 
     """testing first_name in dict"""
     def test_to_dict_firstname(self):
-        """adding comments"""
         self.user.first_name = "Bob"
         self.assertEqual(
             "{} ({}): {}".format(
@@ -106,7 +104,6 @@ class TestUser(unittest.TestCase):
 
     """testing email in dict"""
     def test_to_dict_email(self):
-        """adding comments"""
         self.user.email = "hbtn@holbertonschool.com"
         self.assertEqual(
             "{} ({}): {}".format(
@@ -119,7 +116,6 @@ class TestUser(unittest.TestCase):
 
     """testing last_name in dict"""
     def test_to_dict_lastname(self):
-        """adding comments"""
         self.user.last_name = "Dylan"
         self.assertEqual(
             "{} ({}): {}".format(
@@ -132,7 +128,6 @@ class TestUser(unittest.TestCase):
 
     """testing created_at in dict"""
     def test_to_dict_lastname(self):
-        """adding comments"""
         self.assertEqual(
             "{} ({})".format("created_at", type(self.d_user["created_at"])),
             "created_at (<class 'str'>)"
