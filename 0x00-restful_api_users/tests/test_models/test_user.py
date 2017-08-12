@@ -10,6 +10,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         self.user = User()
         self.d_user = self.user.to_dict()
+        self.dict_user = User()
 
     """testing displays empty if no user"""
     def test_no_name_display(self):
@@ -77,6 +78,7 @@ class TestUser(unittest.TestCase):
 
     """testing id in dict"""
     def test_to_dict_id(self):
+        user_dict = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({})".format("id", type(self.d_user["id"])),
             "id (<class 'str'>)"
