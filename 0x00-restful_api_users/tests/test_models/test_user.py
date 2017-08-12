@@ -18,7 +18,7 @@ class TestUser(unittest.TestCase):
 
     """testing displays empty if no user"""
     def test_no_name_display(self):
-        self.assertIs(self.user.display_name(), "")
+        self.assertEqual(self.user.display_name(), "")
 
     """testing email value display"""
     def test_email_display(self):
