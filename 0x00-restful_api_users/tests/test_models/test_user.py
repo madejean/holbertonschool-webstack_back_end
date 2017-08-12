@@ -61,7 +61,7 @@ class TestUser(unittest.TestCase):
         """
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "{} {}".format(self.user.first_name, self.user.last_name))
+        self.assertEqual(self.user.display_name(), "Bob Dylan")
 
     def test__str__(self):
         """
@@ -123,55 +123,31 @@ class TestUser(unittest.TestCase):
         """
         testing updated_at in dict
         """
-        self.assertEqual(
-            "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
-            "updated_at (<class 'str'>)"
-        )
+        self.assertIsInstance(dict["updated_at"], str)
+
 
     def test_to_dict_firstname(self):
         """
         testing first_name in dict
         """
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "first_name",
-                type(self.d_user["first_name"]),
-                self.dict_user.first_name
-            ),
-            "first_name (<class 'str'>): Bob"
-        )
+        self.assertIsInstance(dict["first_name"], str)
+
 
     def test_to_dict_email(self):
         """
         testing email in dict
         """
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "email",
-                type(self.d_user["email"]),
-                self.dict_user.email
-            ),
-            "email (<class 'str'>): hbtn@holbertonschool.com"
-        )
+        self.assertIsInstance(dict["email"], str)
 
     def test_to_dict_lastname(self):
         """
         testing last_name in dict
         """
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "last_name",
-                type(self.d_user["last_name"]),
-                self.dict_user.last_name
-            ),
-            "last_name (<class 'str'>): Dylan"
-        )
+        self.assertIsInstance(dict["last_name"], str)
+
 
     def test_to_dict_created_at(self):
         """
         testing created_at in dict
         """
-        self.assertEqual(
-            "{} ({})".format("created_at", type(self.d_user["created_at"])),
-            "created_at (<class 'str'>)"
-        )
+        self.assertIsInstance(dict["created_at"], str)
