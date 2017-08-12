@@ -46,7 +46,7 @@ class User(BaseModel, Base):
 
         if not self.first_name:
             return self.last_name
-            
+
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
