@@ -17,18 +17,18 @@ class TestUser(unittest.TestCase):
         self.d_user = self.dict_user.to_dict()
 
     """testing displays empty if no user"""
-    def test_no_name_display(self):
+    def test_no_value_display(self):
         self.assertEqual(self.user.display_name(), "")
 
     """testing email value display"""
     def test_email_display(self):
         self.user.email = "hbtn@holbertonschool.com"
-        self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
+        self.assertEqual(self.user.display_name(), "hbtn@holbertonschool.com")
 
     """testing first name value display"""
     def test_firstname_display(self):
         self.user.first_name = "Bob"
-        self.assertIs(self.user.display_name(), "Bob")
+        self.assertEqual(self.user.display_name(), "Bob")
 
     """testing last name value display"""
     def test_lastname_display(self):
