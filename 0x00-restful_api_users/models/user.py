@@ -64,7 +64,7 @@ class User(BaseModel, Base):
 
     """serialize User"""
     def to_dict(self):
-        d_user = {
+        user_to_dict = {
             "id": str(self.id),
             "email": str(self.email),
             "first_name": str(self.first_name),
@@ -78,4 +78,4 @@ class User(BaseModel, Base):
                 )
             )
         }
-        return d_user
+        return user_to_dict
