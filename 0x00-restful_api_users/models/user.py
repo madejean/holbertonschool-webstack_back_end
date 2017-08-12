@@ -1,13 +1,13 @@
 #!/usr/bin/python3
+"""
+User model
+"""
 import hashlib
 from datetime import datetime
 from models.base_model import Base
 from models.base_model import BaseModel
 from sqlalchemy import Column, String
 
-"""
-User model
-"""
 
 class User(BaseModel, Base):
     """
@@ -78,7 +78,7 @@ class User(BaseModel, Base):
 
     def to_dict(self):
         """
-        serialize User
+            serialize User
         """
         user_to_dict = {
             "id": str(self.id),
