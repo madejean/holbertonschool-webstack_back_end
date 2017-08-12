@@ -61,7 +61,7 @@ class TestUser(unittest.TestCase):
         """
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Bob Dylan")
+        self.assertEqual(self.user.display_name(), "{} {}".format(self.first_name, self.last_name))
 
     def test__str__(self):
         """
