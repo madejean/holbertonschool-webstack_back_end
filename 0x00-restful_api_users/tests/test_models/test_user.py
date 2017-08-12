@@ -27,7 +27,6 @@ class TestUser(unittest.TestCase):
         """
         self.assertIs(self.user.display_name(), "")
 
-
     def test_email_display(self):
         """
             testing email value display
@@ -172,6 +171,7 @@ class TestUser(unittest.TestCase):
             testing created_at in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual("{} ({})".format("created_at", type(d_user["created_at"])),
+        self.assertEqual("{} ({})".format(
+            "created_at", type(d_user["created_at"])),
             "created_at (<class 'str'>)"
         )
