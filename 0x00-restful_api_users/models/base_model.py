@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-"""
-BaseModel
-"""
 import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, DateTime
+
+"""
+BaseModel
+"""
 
 Base = declarative_base()
 
