@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-BaseModel
+    BaseModel
 """
 import uuid
 from datetime import datetime
@@ -12,7 +12,7 @@ Base = declarative_base()
 
 class BaseModel():
     """
-    Creating BaseModel class/ parent of all future models
+        Creating BaseModel class/ parent of all future models
     """
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
@@ -25,7 +25,7 @@ class BaseModel():
 
     def __init__(self):
         """
-        override the instance creation method
+            override the instance creation method
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()

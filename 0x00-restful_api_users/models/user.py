@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-User model
+    User model
 """
 import hashlib
 from datetime import datetime
@@ -11,7 +11,7 @@ from sqlalchemy import Column, String
 
 class User(BaseModel, Base):
     """
-    creating user model
+        creating user model
     """
     __tablename__ = 'users'
     email = Column(String(128), nullable=False)
@@ -20,14 +20,14 @@ class User(BaseModel, Base):
     _password = Column(String(128), nullable=False)
 
     """
-    password getter
+        password getter
     """
     @property
     def password(self):
         return self._password
 
     """
-    password setter
+        password setter
     """
     @password.setter
     def password(self, password):
@@ -40,7 +40,7 @@ class User(BaseModel, Base):
 
     def display_name(self):
         """
-        displays the full name of an User instance
+            displays the full name of an User instance
         """
         if not (self.email or self.first_name or self.first_name):
             return ""
@@ -55,7 +55,7 @@ class User(BaseModel, Base):
 
     def __str__(self):
         """
-        reformats in a more readable way
+            reformats in a more readable way
         """
         return("[User] {} - {} - {}".format(
             self.id, self.email, self.display_name()
@@ -64,7 +64,7 @@ class User(BaseModel, Base):
 
     def is_valid_password(self, pwd):
         """
-        validates password
+            validates password
         """
         if pwd is None or not isinstance(pwd, str) or self._password is None:
             return False

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Unittest for User model
+    Unittest for User model
 """
 import unittest
 import hashlib
@@ -12,7 +12,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
 
         """
-        setUp user instance
+            setUp user instance
         """
         self.user = User()
         self.dict_user = User()
@@ -23,28 +23,28 @@ class TestUser(unittest.TestCase):
 
     def test_no_value_display(self):
         """
-        testing displays empty if no user
+            testing displays empty if no user
         """
         self.assertIs(self.user.display_name(), "")
 
 
     def test_email_display(self):
         """
-        testing email value display
+            testing email value display
         """
         self.user.email = "hbtn@holbertonschool.com"
         self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
 
     def test_firstname_display(self):
         """
-        testing first name value display
+            testing first name value display
         """
         self.user.first_name = "Bob"
         self.assertIs(self.user.display_name(), "Bob")
 
     def test_lastname_display(self):
         """
-        testing last name value display
+            testing last name value display
         """
         self.user.email = "test@hotmail.com"
         self.user.last_name = "Dylan"
@@ -52,7 +52,7 @@ class TestUser(unittest.TestCase):
 
     def test_fullname_display(self):
         """
-        testing full name value display
+            testing full name value display
         """
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
@@ -60,7 +60,7 @@ class TestUser(unittest.TestCase):
 
     def test__str__(self):
         """
-        testing reformatted user info display
+            testing reformatted user info display
         """
         self.assertEqual(
             self.user.__str__(),
@@ -73,13 +73,13 @@ class TestUser(unittest.TestCase):
 
     def test_no_password(self):
         """
-        testing empty password
+            testing empty password
         """
         self.assertIsNone(self.user.password)
 
     def test_password(self):
         """
-        testing password value
+            testing password value
         """
         self.user.password = "hello"
         self.assertEqual(
@@ -89,20 +89,20 @@ class TestUser(unittest.TestCase):
 
     def test_is_valid_password_none(self):
         """
-        testing password None
+            testing password None
         """
         self.assertFalse(self.user.is_valid_password(None))
 
     def test_password_is_not_valid(self):
         """
-        testing false password
+            testing false password
         """
         self.assertFalse(self.user.is_valid_password(89))
         self.assertFalse(self.user.is_valid_password("tutu1234"))
 
     def test_password_is_valid(self):
         """
-        testing valid password
+            testing valid password
         """
         self.user.email = "hbtn@holbertonschool.com"
         self.user.password = "toto1234"
@@ -110,14 +110,14 @@ class TestUser(unittest.TestCase):
 
     def test_id_to_dict_id(self):
         """
-        testing id in dict
+            testing id in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertIsInstance(d_user["id"], str)
 
     def test_to_dict_updated_at(self):
         """
-        testing updated_at in dict
+            testing updated_at in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertEqual(
@@ -127,7 +127,7 @@ class TestUser(unittest.TestCase):
 
     def test_to_dict_firstname(self):
         """
-        testing first_name in dict
+            testing first_name in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertEqual(
@@ -141,7 +141,7 @@ class TestUser(unittest.TestCase):
 
     def test_to_dict_email(self):
         """
-        testing email in dict
+            testing email in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertEqual(
@@ -155,7 +155,7 @@ class TestUser(unittest.TestCase):
 
     def test_to_dict_lastname(self):
         """
-        testing last_name in dict
+            testing last_name in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertEqual(
@@ -169,7 +169,7 @@ class TestUser(unittest.TestCase):
 
     def test_to_dict_created_at(self):
         """
-        testing created_at in dict
+            testing created_at in dict
         """
         d_user = self.dict_user.to_dict()
         self.assertEqual(
