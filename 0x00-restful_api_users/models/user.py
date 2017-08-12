@@ -1,81 +1,121 @@
 #!/usr/bin/python3
-"""User model"""
+import unittest
 import hashlib
-from datetime import datetime
-from models.base_model import Base
-from models.base_model import BaseModel
-from sqlalchemy import Column, String
+from models.user import User
+
+class Test_user(unittest.TestCase):
+    def setUp(self):
+        self.none_user = User()
+        self.user = User()
+        self.dict_user = User()
+        self.dict_user.email = "hbtn@holbertonschool.com"
+        self.dict_user.password = "toto1234"
+        self.dict_user.first_name = "Bob"
+        self.dict_user.last_name = "Dylan"
+
+    def test_first_name(self):
+        self.user.first_name = "Bob"
+        self.assertEqual(self.user.display_name(), "Steven")
+
+    def test_last_name(self):
+        self.user.last_name = "Dylan"
+        self.assertEqual(self.user.display_name(), "Garcia")
+
+    def test_email(self):
+        self.user.email = "bobDylan@hotmail.com"
+        self.assertEqual(self.user.display_name(), "steven@gmail.com")
+
+    def test_first_last_name(self):
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        self.assertEqual(self.user.display_name(), "Steven Garcia")
+
+    def test_none(self):
+        self.assertEqual(self.none_user.display_name(), "")
+
+    def test_str_email(self):
+        self.user.email = "hbtn@holbertonschool.com"
+        self.assertIn("- hbtn@holbertonschool.com - hbtn@holbertonschool.com",
+                      str(self.user))
+
+    def test_str_first_last_name(self):
+        self.user.email = "hbtn@holbertonschool.com"
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        self.assertIn("- hbtn@holbertonschool.com - Bob Dylan", str(self.user))
+
+    def test_str_none(self):
+        '''
+            testing _str_none
+        '''
+        self.assertIn("- None - ", str(self.user))
+
+    def test_str_none_email(self):
+        '''
+            Testing _str_none_email
+        '''
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        self.assertIn("- None - Bob Dylan", str(self.user))
+
+    def test_password_encription(self):
+        self.user.password = "hello"
+        string = hashlib.sha224(b"hello").hexdigest()
+        self.assertEqual(string, self.user.password)
+
+    def test_none_password(self):
+        self.assertEqual(None, self.user.password)
+
+    def test_not_str_password(self):
+        self.user.password = 124324
+        self.assertEqual(None, self.user.password)
+
+    def test_pwd_none(self):
+        self.user.password = "toto1234"
+        validator = self.user.is_valid_password(None)
+        self.assertFalse(validator)
+
+    def test__pasword_none(self):
+        self.user.password = None
+        validator = self.user.is_valid_password("toto1234")
+        self.assertFalse(validator)
+
+    def test_pwd_type(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password(89)
+        self.assertFalse(validator)
+
+    def test_pwd__password_not_equal(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password("hi")
+        self.assertFalse(validator)
+
+    def test_pwd_password_equal(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password("hello")
+        self.assertTrue(validator)
 
 
-class User(BaseModel, Base):
-    """creating user model"""
-    __tablename__ = 'users'
-    email = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
-    _password = Column(String(128), nullable=False)
+    def test_id_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["id"], str)
 
-    """password getter"""
-    @property
-    def password(self):
-        return self._password
+    def test_email_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["email"], str)
 
-    """password setter"""
-    @password.setter
-    def password(self, password):
-        if password is None or not isinstance(password, str):
-            self._password = None
-        else:
-            m = hashlib.md5()
-            m.update(password.encode('utf-8'))
-            self._password = m.hexdigest().lower()
+    def test_first_name_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["first_name"], str)
 
-    """displays the full name of an User instance"""
-    def display_name(self):
-        if not (self.email or self.first_name or self.first_name):
-            return ""
-        if not (self.first_name or self.last_name):
-            return self.email
-        if not self.last_name:
-            return self.first_name
-        if not self.first_name:
-            return self.last_name
-        else:
-            return("{} {}".format(self.first_name, self.last_name))
+    def test_last_name_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["last_name"], str)
 
-    """reformats in a more readable way"""
-    def __str__(self):
-        return("[User] {} - {} - {}".format(
-            self.id, self.email, self.display_name()
-            )
-        )
+    def test_updated_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["updated_at"], str)
 
-    """validates password"""
-    def is_valid_password(self, pwd):
-        if pwd is None or not isinstance(pwd, str) or self._password is None:
-            return False
-        m = hashlib.md5()
-        m.update(pwd.encode('utf-8'))
-        md5_pwd = m.hexdigest().lower()
-        if md5_pwd == self._password:
-            return True
-        else:
-            return False
-
-    """serialize User"""
-    def to_dict(self):
-        d_user = {
-            "id": str(self.id),
-            "email": str(self.email),
-            "first_name": str(self.first_name),
-            "last_name": str(self.last_name),
-            "created_at": str(datetime.strftime(
-                self.created_at, "%Y-%m-%d %H:%M:%S"
-                )
-            ),
-            "updated_at": str(datetime.strftime(
-                self.updated_at, "%Y-%m-%d %H:%M:%S"
-                )
-            )
-        }
-        return d_user
+    def test_created_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["created_at"], str)
