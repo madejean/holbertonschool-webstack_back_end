@@ -80,7 +80,7 @@ class User(BaseModel, Base):
         """
         serialize User
         """
-         user_to_dict = {
+        user_to_dict = {
             "id": str(self.id),
             "email": str(self.email),
             "first_name": str(self.first_name),
