@@ -80,12 +80,14 @@ class User(BaseModel, Base):
         """
         serialize User
         """
-        user_to_dict = {
+         user_to_dict = {
             "id": str(self.id),
             "email": str(self.email),
             "first_name": str(self.first_name),
             "last_name": str(self.last_name),
-            "created_at": str(datetime.strftime(self.created_at, "%Y-%m-%d %H:%M:%S")),
-            "updated_at": str(datetime.strftime(self.updated_at, "%Y-%m-%d %H:%M:%S"))
+            "created_at": str(datetime.strftime(self.created_at,
+                                                "%Y-%m-%d %H:%M:%S")),
+            "updated_at": str(datetime.strftime(self.updated_at,
+                                                "%Y-%m-%d %H:%M:%S"))
         }
-        return user_to_dict
+        return (user_to_dict)
