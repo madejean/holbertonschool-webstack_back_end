@@ -10,7 +10,6 @@ from models.user import User
 class TestUser(unittest.TestCase):
 
     def setUp(self):
-
         """
             setUp user instance
         """
@@ -26,7 +25,6 @@ class TestUser(unittest.TestCase):
             testing displays empty if no user
         """
         self.assertIs(self.user.display_name(), "")
-
 
     def test_email_display(self):
         """
