@@ -113,7 +113,7 @@ class TestUser(unittest.TestCase):
         testing id in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertIsInstance(self.d_user["id"], str)
+        self.assertIsInstance(d_user["id"], str)
 
     def test_to_dict_updated_at(self):
         """
