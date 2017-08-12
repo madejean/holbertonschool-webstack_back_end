@@ -80,24 +80,22 @@ class TestUser(unittest.TestCase):
         self.user.password = "toto1234"
         self.assertTrue(self.user.is_valid_password("toto1234"))
 
-    # Testing user dict
-
     """testing id in dict"""
-    def test_to_dict_id(self):
+    def test_id_to_dict(self):
         self.assertEqual(
             "{} ({})".format("id", type(self.d_user["id"])),
             "id (<class 'str'>)"
         )
 
     """testing updated_at in dict"""
-    def test_to_dict_updated_at(self):
+    def test_updated_at_to_dict(self):
         self.assertEqual(
             "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
             "updated_at (<class 'str'>)"
         )
 
     """testing first_name in dict"""
-    def test_to_dict_firstname(self):
+    def test_firstname_to_dict(self):
         self.assertEqual(
             "{} ({}): {}".format(
                 "first_name",
@@ -108,7 +106,7 @@ class TestUser(unittest.TestCase):
         )
 
     """testing email in dict"""
-    def test_to_dict_email(self):
+    def test_email_to_dict(self):
         self.assertEqual(
             "{} ({}): {}".format(
                 "email",
@@ -119,7 +117,7 @@ class TestUser(unittest.TestCase):
         )
 
     """testing last_name in dict"""
-    def test_to_dict_lastname(self):
+    def test_lastname_to_dict(self):
         self.assertEqual(
             "{} ({}): {}".format(
                 "last_name",
@@ -130,7 +128,7 @@ class TestUser(unittest.TestCase):
         )
 
     """testing created_at in dict"""
-    def test_to_dict_created_at(self):
+    def test_created_at_to_dict(self):
         self.assertEqual(
             "{} ({})".format("created_at", type(self.d_user["created_at"])),
             "created_at (<class 'str'>)"
