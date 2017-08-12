@@ -78,4 +78,4 @@ class User(BaseModel, Base):
                 )
             )
         }
-        return d_user
+        return user_to_dict
