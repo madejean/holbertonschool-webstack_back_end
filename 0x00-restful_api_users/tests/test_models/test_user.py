@@ -82,7 +82,6 @@ class TestUser(unittest.TestCase):
 
     """testing id in dict"""
     def test_id_to_dict_id(self):
-        self.assertEqual(
         self.assertIsInstance(self.d_user["id"], str)
 
 
