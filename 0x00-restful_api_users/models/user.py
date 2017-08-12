@@ -39,7 +39,6 @@ class User(BaseModel, Base):
             self._password = m.hexdigest().lower()
 
     def display_name(self):
-
         """
         displays the full name of an User instance
         """
@@ -55,7 +54,6 @@ class User(BaseModel, Base):
             return("{} {}".format(self.first_name, self.last_name))
 
     def __str__(self):
-
         """
         reformats in a more readable way
         """
@@ -79,7 +77,6 @@ class User(BaseModel, Base):
             return False
 
     def to_dict(self):
-
         """
         serialize User
         """
