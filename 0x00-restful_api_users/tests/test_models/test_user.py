@@ -130,3 +130,6 @@ class TestUser(unittest.TestCase):
             "{} ({})".format("created_at", type(self.d_user["created_at"])),
             "created_at (<class 'str'>)"
         )
+
+if __name__ == "__main__":
+    unittest.main()
