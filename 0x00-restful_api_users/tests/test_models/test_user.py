@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Unittest for User model"""
+"""
+Unittest for User model
+"""
 import unittest
 import hashlib
 from models.user import User

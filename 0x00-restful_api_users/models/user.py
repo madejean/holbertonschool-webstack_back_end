@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""User model"""
+"""
+User model
+"""
 import hashlib
 from datetime import datetime
 from models.base_model import Base

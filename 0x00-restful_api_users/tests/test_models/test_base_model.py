@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Unittest for BaseModel"""
+"""
+Unittest for BaseModel
+"""
 import unittest
 from sqlalchemy import Column, String, DateTime
 import uuid
