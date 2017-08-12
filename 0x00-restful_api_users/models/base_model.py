@@ -24,6 +24,7 @@ class BaseModel():
     )
 
     def __init__(self):
+        
         """
         override the instance creation method
         """

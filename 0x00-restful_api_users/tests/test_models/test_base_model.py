@@ -15,6 +15,7 @@ class TestBaseModel(unittest.TestCase):
         self.base_model = BaseModel()
 
     def test_not_none(self):
+        
         """
         testing values are not none
         """
@@ -28,6 +29,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.base_model.id, str)
 
     def test_unique_id(self):
+
         """
         testing id unique
         """
@@ -36,12 +38,14 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(id_1, id_2)
 
     def test_created_at(self):
+
         """
         testing created_at
         """
         self.assertIsInstance(self.base_model.created_at, datetime)
 
     def test_updated_at(self):
+
         """
         testing updated_at
         """
