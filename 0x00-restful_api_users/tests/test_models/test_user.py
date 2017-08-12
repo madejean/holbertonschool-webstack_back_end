@@ -55,7 +55,10 @@ class TestUser(unittest.TestCase):
     """testing password value"""
     def test_password(self):
         self.user.password = "hello"
-        self.assertEqual(self.user.password, "5d41402abc4b2a76b9719d911017c592")
+        self.assertEqual(
+            self.user.password,
+            "5d41402abc4b2a76b9719d911017c592"
+        )
 
     """testing password None"""
     def test_is_valid_password_none(self):
@@ -75,27 +78,57 @@ class TestUser(unittest.TestCase):
     """testing id in dict"""
     def test_to_dict_id(self):
         self.user.password = "toto1234"
-        self.assertEqual("{} ({})".format("id", type(self.d_user["id"])), "id (<class 'str'>)")
+        self.assertEqual(
+            "{} ({})".format("id", type(self.d_user["id"])),
+            "id (<class 'str'>)"
+        )
 
     """testing updated_at in dict"""
     def test_to_dict_updated_at(self):
-        self.assertEqual("{} ({})".format("updated_at", type(self.d_user["updated_at"])), "updated_at (<class 'str'>)")
+        self.assertEqual(
+            "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
+            "updated_at (<class 'str'>)"
+        )
 
     """testing first_name in dict"""
     def test_to_dict_firstname(self):
         self.user.first_name = "Bob"
-        self.assertEqual("{} ({}): {}".format("first_name", type(self.d_user["first_name"]), self.user.first_name), "first_name (<class 'str'>): Bob")
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "first_name",
+                type(self.d_user["first_name"]),
+                self.user.first_name
+            ),
+            "first_name (<class 'str'>): Bob"
+        )
 
     """testing email in dict"""
     def test_to_dict_email(self):
         self.user.email = "hbtn@holbertonschool.com"
-        self.assertEqual("{} ({}): {}".format("email", type(self.d_user["email"]), self.user.email), "email (<class 'str'>): hbtn@holbertonschool.com")
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "email",
+                type(self.d_user["email"]),
+                self.user.email
+            ),
+            "email (<class 'str'>): hbtn@holbertonschool.com"
+        )
 
     """testing last_name in dict"""
     def test_to_dict_lastname(self):
         self.user.last_name = "Dylan"
-        self.assertEqual("{} ({}): {}".format("last_name", type(self.d_user["last_name"]), self.user.last_name), "last_name (<class 'str'>): Dylan")
+        self.assertEqual(
+            "{} ({}): {}".format(
+                "last_name",
+                type(self.d_user["last_name"]),
+                self.user.last_name
+            ),
+            "last_name (<class 'str'>): Dylan"
+        )
 
     """testing created_at in dict"""
     def test_to_dict_lastname(self):
-        self.assertEqual("{} ({})".format("created_at", type(self.d_user["created_at"])), "created_at (<class 'str'>)")
+        self.assertEqual(
+            "{} ({})".format("created_at", type(self.d_user["created_at"])),
+            "created_at (<class 'str'>)"
+        )
