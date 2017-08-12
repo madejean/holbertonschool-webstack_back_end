@@ -20,7 +20,6 @@ class TestUser(unittest.TestCase):
         self.dict_user.password = "toto1234"
         self.dict_user.first_name = "Bob"
         self.dict_user.last_name = "Dylan"
-        self.d_user = self.dict_user.to_dict()
 
     def test_no_value_display(self):
         """
@@ -113,12 +112,14 @@ class TestUser(unittest.TestCase):
         """
         testing id in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertIsInstance(self.d_user["id"], str)
 
     def test_to_dict_updated_at(self):
         """
         testing updated_at in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
             "updated_at (<class 'str'>)"
@@ -128,6 +129,7 @@ class TestUser(unittest.TestCase):
         """
         testing first_name in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({}): {}".format(
                 "first_name",
@@ -141,6 +143,7 @@ class TestUser(unittest.TestCase):
         """
         testing email in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({}): {}".format(
                 "email",
@@ -154,6 +157,7 @@ class TestUser(unittest.TestCase):
         """
         testing last_name in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({}): {}".format(
                 "last_name",
@@ -167,6 +171,7 @@ class TestUser(unittest.TestCase):
         """
         testing created_at in dict
         """
+        d_user = self.dict_user.to_dict()
         self.assertEqual(
             "{} ({})".format("created_at", type(self.d_user["created_at"])),
             "created_at (<class 'str'>)"
