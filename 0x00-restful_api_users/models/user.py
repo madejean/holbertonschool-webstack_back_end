@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-User model
-"""
+"""User model"""
 import hashlib
 from datetime import datetime
 from models.base_model import Base
@@ -34,14 +32,21 @@ class User(BaseModel, Base):
 
     """displays the full name of an User instance"""
     def display_name(self):
+        """
+        displays the full name of an User instance
+        """
         if not (self.email or self.first_name or self.first_name):
             return ""
+
         if not (self.first_name or self.last_name):
             return self.email
+
         if not self.last_name:
             return self.first_name
+
         if not self.first_name:
             return self.last_name
+            
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
