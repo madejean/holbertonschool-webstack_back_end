@@ -11,8 +11,8 @@ class User(BaseModel, Base):
     """creating user model"""
     __tablename__ = 'users'
     email = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
     _password = Column(String(128), nullable=False)
 
     """password getter"""
@@ -33,13 +33,13 @@ class User(BaseModel, Base):
     """displays the full name of an User instance"""
     def display_name(self):
         if not (self.email or self.first_name or self.first_name):
-            return("")
+            return ""
         if not (self.first_name or self.last_name):
-            return(self.email)
+            return self.email
         if not self.last_name:
-            return(self.first_name)
+            return self.first_name
         if not self.first_name:
-            return(self.last_name)
+            return self.last_name
         else:
             return("{} {}".format(self.first_name, self.last_name))
 
