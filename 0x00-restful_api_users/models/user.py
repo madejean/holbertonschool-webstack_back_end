@@ -1,134 +1,81 @@
 #!/usr/bin/python3
-"""Unittest for User model"""
-import unittest
+"""User model"""
 import hashlib
-from models.user import User
+from datetime import datetime
+from models.base_model import Base
+from models.base_model import BaseModel
+from sqlalchemy import Column, String
 
 
-class TestUser(unittest.TestCase):
-    """setUp user instance"""
-    def setUp(self):
-        self.user = User()
-        self.d_user = self.user.to_dict()
+class User(BaseModel, Base):
+    """creating user model"""
+    __tablename__ = 'users'
+    email = Column(String(128), nullable=False)
+    first_name = Column(String(128))
+    last_name = Column(String(128))
+    _password = Column(String(128), nullable=False)
 
-    """testing displays empty if no user"""
-    def test_no_name_display(self):
-        self.assertIs(self.user.display_name(), "")
+    """password getter"""
+    @property
+    def password(self):
+        return self._password
 
-    """testing email value display"""
-    def test_email_display(self):
-        self.user.email = "hbtn@holbertonschool.com"
-        self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
+    """password setter"""
+    @password.setter
+    def password(self, password):
+        if password is None or not isinstance(password, str):
+            self._password = None
+        else:
+            m = hashlib.md5()
+            m.update(password.encode('utf-8'))
+            self._password = m.hexdigest().lower()
 
-     """testing first name value display"""
-    def test_firstname_display(self):
-        self.user.first_name = "Bob"
-        self.assertIs(self.user.display_name(), "Bob")
+    """displays the full name of an User instance"""
+    def display_name(self):
+        if not (self.email or self.first_name or self.first_name):
+            return ""
+        if not (self.first_name or self.last_name):
+            return self.email
+        if not self.last_name:
+            return self.first_name
+        if not self.first_name:
+            return self.last_name
+        else:
+            return("{} {}".format(self.first_name, self.last_name))
 
-    """testing last name value display"""
-    def test_lastname_display(self):
-        self.user.email = "test@hotmail.com"
-        self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Dylan")
-
-     """testing full name value display"""
-    def test_fullname_display(self):
-        self.user.first_name = "Bob"
-        self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Bob Dylan")
-
-    """testing reformatted user info display"""
-    def test__str__(self):
-        self.assertEqual(
-            self.user.__str__(),
-            "[User] {} - {} - {}".format(
-                self.user.id,
-                self.user.email,
-                self.user.display_name()
+    """reformats in a more readable way"""
+    def __str__(self):
+        return("[User] {} - {} - {}".format(
+            self.id, self.email, self.display_name()
             )
         )
 
-    """testing empty password"""
-    def test_no_password(self):
-        self.assertIsNone(self.user.password)
+    """validates password"""
+    def is_valid_password(self, pwd):
+        if pwd is None or not isinstance(pwd, str) or self._password is None:
+            return False
+        m = hashlib.md5()
+        m.update(pwd.encode('utf-8'))
+        md5_pwd = m.hexdigest().lower()
+        if md5_pwd == self._password:
+            return True
+        else:
+            return False
 
-    """testing password value"""
-    def test_password(self):
-        self.user.password = "hello"
-        self.assertEqual(
-            self.user.password,
-            "5d41402abc4b2a76b9719d911017c592"
-        )
-
-    """testing password None"""
-    def test_is_valid_password_none(self):
-        self.assertFalse(self.user.is_valid_password(None))
-
-    """testing false password"""
-    def test_password_is_not_valid(self):
-        self.assertFalse(self.user.is_valid_password(89))
-        self.assertFalse(self.user.is_valid_password("tutu1234"))
-
-    """testing valid password"""
-    def test_password_is_valid(self):
-        self.user.email = "hbtn@holbertonschool.com"
-        self.user.password = "toto1234"
-        self.assertTrue(self.user.is_valid_password("toto1234"))
-
-    """testing id in dict"""
-    def test_to_dict_id(self):
-        self.user.password = "toto1234"
-        self.assertEqual(
-            "{} ({})".format("id", type(self.d_user["id"])),
-            "id (<class 'str'>)"
-        )
-
-    """testing updated_at in dict"""
-    def test_to_dict_updated_at(self):
-        self.assertEqual(
-            "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
-            "updated_at (<class 'str'>)"
-        )
-
-     """testing first_name in dict"""
-    def test_to_dict_firstname(self):
-        self.user.first_name = "Bob"
-	self.assertEqual(
-            "{} ({}): {}".format(
-                "first_name",
-                type(self.d_user["first_name"]),
-                self.user.first_name
+    """serialize User"""
+    def to_dict(self):
+        d_user = {
+            "id": str(self.id),
+            "email": str(self.email),
+            "first_name": str(self.first_name),
+            "last_name": str(self.last_name),
+            "created_at": str(datetime.strftime(
+                self.created_at, "%Y-%m-%d %H:%M:%S"
+                )
             ),
-            "first_name (<class 'str'>): Bob"
-        )
-
-    """testing email in dict"""
-    def test_to_dict_email(self):
-	self.user.email = "hbtn@holbertonschool.com"
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "email",
-                type(self.d_user["email"]),
-                self.user.email
-            ),
-            "email (<class 'str'>): hbtn@holbertonschool.com"
-        )
-
-    """testing last_name in dict"""
-    def test_to_dict_lastname(self):
-        self.user.last_name = "Dylan"
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "last_name",
-                type(self.d_user["last_name"]),
-                self.user.last_name
-            ),
-            "last_name (<class 'str'>): Dylan"
-        )
-
-    """testing created_at in dict"""
-    def test_to_dict_lastname(self):
-        self.assertEqual(
-            "{} ({})".format("created_at", type(self.d_user["created_at"])),
-            "created_at (<class 'str'>)"
-        )
+            "updated_at": str(datetime.strftime(
+                self.updated_at, "%Y-%m-%d %H:%M:%S"
+                )
+            )
+        }
+        return d_user

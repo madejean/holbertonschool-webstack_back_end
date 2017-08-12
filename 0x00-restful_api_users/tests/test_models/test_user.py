@@ -1,134 +1,121 @@
 #!/usr/bin/python3
-"""Unittest for User model"""
 import unittest
 import hashlib
 from models.user import User
 
-
-class TestUser(unittest.TestCase):
-    """setUp user instance"""
+class Test_user(unittest.TestCase):
     def setUp(self):
+        self.none_user = User()
         self.user = User()
-        self.d_user = self.user.to_dict()
+        self.dict_user = User()
+        self.dict_user.email = "hbtn@holbertonschool.com"
+        self.dict_user.password = "toto1234"
+        self.dict_user.first_name = "Bob"
+        self.dict_user.last_name = "Dylan"
 
-    """testing displays empty if no user"""
-    def test_no_name_display(self):
-        self.assertIs(self.user.display_name(), "")
+    def test_first_name(self):
+        self.user.first_name = "Bob"
+        self.assertEqual(self.user.display_name(), "Steven")
 
-    """testing email value display"""
-    def test_email_display(self):
+    def test_last_name(self):
+        self.user.last_name = "Dylan"
+        self.assertEqual(self.user.display_name(), "Garcia")
+
+    def test_email(self):
+        self.user.email = "bobDylan@hotmail.com"
+        self.assertEqual(self.user.display_name(), "steven@gmail.com")
+
+    def test_first_last_name(self):
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        self.assertEqual(self.user.display_name(), "Steven Garcia")
+
+    def test_none(self):
+        self.assertEqual(self.none_user.display_name(), "")
+
+    def test_str_email(self):
         self.user.email = "hbtn@holbertonschool.com"
-        self.assertIs(self.user.display_name(), "hbtn@holbertonschool.com")
+        self.assertIn("- hbtn@holbertonschool.com - hbtn@holbertonschool.com",
+                      str(self.user))
 
-    """testing first name value display"""
-    def test_firstname_display(self):
-        self.user.first_name = "Bob"
-        self.assertIs(self.user.display_name(), "Bob")
-
-    """testing last name value display"""
-    def test_lastname_display(self):
-        self.user.email = "test@hotmail.com"
-        self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Dylan")
-
-    """testing full name value display"""
-    def test_fullname_display(self):
+    def test_str_first_last_name(self):
+        self.user.email = "hbtn@holbertonschool.com"
         self.user.first_name = "Bob"
         self.user.last_name = "Dylan"
-        self.assertEqual(self.user.display_name(), "Bob Dylan")
+        self.assertIn("- hbtn@holbertonschool.com - Bob Dylan", str(self.user))
 
-    """testing reformatted user info display"""
-    def test__str__(self):
-        self.assertEqual(
-            self.user.__str__(),
-            "[User] {} - {} - {}".format(
-                self.user.id,
-                self.user.email,
-                self.user.display_name()
-            )
-        )
+    def test_str_none(self):
+        '''
+            testing _str_none
+        '''
+        self.assertIn("- None - ", str(self.user))
 
-    """testing empty password"""
-    def test_no_password(self):
-        self.assertIsNone(self.user.password)
+    def test_str_none_email(self):
+        '''
+            Testing _str_none_email
+        '''
+        self.user.first_name = "Bob"
+        self.user.last_name = "Dylan"
+        self.assertIn("- None - Bob Dylan", str(self.user))
 
-    """testing password value"""
-    def test_password(self):
+    def test_password_encription(self):
         self.user.password = "hello"
-        self.assertEqual(
-            self.user.password,
-            "5d41402abc4b2a76b9719d911017c592"
-        )
+        string = hashlib.sha224(b"hello").hexdigest()
+        self.assertEqual(string, self.user.password)
 
-    """testing password None"""
-    def test_is_valid_password_none(self):
-        self.assertFalse(self.user.is_valid_password(None))
+    def test_none_password(self):
+        self.assertEqual(None, self.user.password)
 
-    """testing false password"""
-    def test_password_is_not_valid(self):
-        self.assertFalse(self.user.is_valid_password(89))
-        self.assertFalse(self.user.is_valid_password("tutu1234"))
+    def test_not_str_password(self):
+        self.user.password = 124324
+        self.assertEqual(None, self.user.password)
 
-    """testing valid password"""
-    def test_password_is_valid(self):
-        self.user.email = "hbtn@holbertonschool.com"
+    def test_pwd_none(self):
         self.user.password = "toto1234"
-        self.assertTrue(self.user.is_valid_password("toto1234"))
+        validator = self.user.is_valid_password(None)
+        self.assertFalse(validator)
 
-    """testing id in dict"""
-    def test_to_dict_id(self):
-        self.user.password = "toto1234"
-        self.assertEqual(
-            "{} ({})".format("id", type(self.d_user["id"])),
-            "id (<class 'str'>)"
-        )
+    def test__pasword_none(self):
+        self.user.password = None
+        validator = self.user.is_valid_password("toto1234")
+        self.assertFalse(validator)
 
-    """testing updated_at in dict"""
-    def test_to_dict_updated_at(self):
-        self.assertEqual(
-            "{} ({})".format("updated_at", type(self.d_user["updated_at"])),
-            "updated_at (<class 'str'>)"
-        )
+    def test_pwd_type(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password(89)
+        self.assertFalse(validator)
 
-    """testing first_name in dict"""
-    def test_to_dict_firstname(self):
-        self.user.first_name = "Bob"
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "first_name",
-                type(self.d_user["first_name"]),
-                self.user.first_name
-            ),
-            "first_name (<class 'str'>): Bob"
-        )
+    def test_pwd__password_not_equal(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password("hi")
+        self.assertFalse(validator)
 
-    """testing email in dict"""
-    def test_to_dict_email(self):
-        self.user.email = "hbtn@holbertonschool.com"
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "email",
-                type(self.d_user["email"]),
-                self.user.email
-            ),
-            "email (<class 'str'>): hbtn@holbertonschool.com"
-        )
+    def test_pwd_password_equal(self):
+        self.user.password = "hello"
+        validator = self.user.is_valid_password("hello")
+        self.assertTrue(validator)
 
-    """testing last_name in dict"""
-    def test_to_dict_lastname(self):
-        self.user.last_name = "Dylan"
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "last_name",
-                type(self.d_user["last_name"]),
-                self.user.last_name
-            ),
-            "last_name (<class 'str'>): Dylan"
-        )
 
-    """testing created_at in dict"""
-    def test_to_dict_lastname(self):
-        self.assertEqual(
-            "{} ({})".format("created_at", type(self.d_user["created_at"])),
-            "created_at (<class 'str'>)"
-        )
+    def test_id_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["id"], str)
+
+    def test_email_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["email"], str)
+
+    def test_first_name_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["first_name"], str)
+
+    def test_last_name_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["last_name"], str)
+
+    def test_updated_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["updated_at"], str)
+
+    def test_created_type(self):
+        dict = self.dict_user.to_dict()
+        self.assertIsInstance(dict["created_at"], str)
