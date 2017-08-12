@@ -120,57 +120,32 @@ class TestUser(unittest.TestCase):
             testing updated_at in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual(
-            "{} ({})".format("updated_at", type(d_user["updated_at"])),
-            "updated_at (<class 'str'>)"
-        )
+        self.assertEqual("{} ({})".format("updated_at", type(d_user["updated_at"])), "updated_at (<class 'str'>)")
 
     def test_to_dict_firstname(self):
         """
             testing first_name in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "first_name",
-                type(d_user["first_name"]),
-                self.dict_user.first_name
-            ),
-            "first_name (<class 'str'>): Bob"
-        )
+        self.assertEqual("{} ({}): {}".format("first_name", type(d_user["first_name"]), self.dict_user.first_name), "first_name (<class 'str'>): Bob")
 
     def test_to_dict_email(self):
         """
             testing email in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "email",
-                type(d_user["email"]),
-                self.dict_user.email
-            ),
-            "email (<class 'str'>): hbtn@holbertonschool.com"
-        )
+        self.assertEqual("{} ({}): {}".format("email", type(d_user["email"]), self.dict_user.email), "email (<class 'str'>): hbtn@holbertonschool.com")
 
     def test_to_dict_lastname(self):
         """
             testing last_name in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual(
-            "{} ({}): {}".format(
-                "last_name",
-                type(d_user["last_name"]),
-                self.dict_user.last_name
-            ),
-            "last_name (<class 'str'>): Dylan"
-        )
+        self.assertEqual("{} ({}): {}".format("last_name", type(d_user["last_name"]), self.dict_user.last_name), "last_name (<class 'str'>): Dylan")
 
     def test_to_dict_created_at(self):
         """
             testing created_at in dict
         """
         d_user = self.dict_user.to_dict()
-        self.assertEqual("{} ({})".format("created_at", type(d_user["created_at"])), "created_at (<class 'str'>)"
-        )
+        self.assertEqual("{} ({})".format("created_at", type(d_user["created_at"])), "created_at (<class 'str'>)")
