@@ -45,6 +45,12 @@ class BaseModel():
 
     @classmethod
     def first(cls):
-        """returns all instances of cls from MySQL database"""
+        """returns first instances of cls from MySQL database"""
         from models import db_session
         return db_session.query(cls).order_by(cls.created_at).first()
+
+    @classmethod
+    def last(cls):
+        """returns last instance of cls from MySQL database"""
+        from models import db_session
+        return db_session.query(cls).order_by(cls.created_at.desc()).first()
