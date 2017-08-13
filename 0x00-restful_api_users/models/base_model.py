@@ -36,3 +36,9 @@ class BaseModel():
         """returns all instances of cls from MySQL database"""
         from models import db_session
         return db_session.query(cls).order_by(cls.created_at).all()
+    
+    @classmethod
+    def count(cls):
+        """returns the number instances of cls objects in your MySQL database"""
+        from models import db_session
+        return db_session.query(cls).count()
