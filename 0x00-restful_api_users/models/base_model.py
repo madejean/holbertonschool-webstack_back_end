@@ -65,6 +65,7 @@ class BaseModel():
 
     @classmethod
     def all(cls):
+        """returns all instances of cls from MySQL database"""
         from models import db_session
         return db_session.query(cls).order_by(cls.created_at).all()
       
