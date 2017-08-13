@@ -17,9 +17,9 @@ db_engine = create_engine(
     )
 
 if os.environ.get('HBNB_MYSQL_ENV') == 'test':
-    User.metadata.drop_all()
+    Base.metadata.drop_all()
 
-User.metadata.create_all(db_engine)
+Base.metadata.create_all(db_engine)
 """instance of SQLAlchemy Session"""
 db_session = scoped_session(
     sessionmaker(bind=db_engine, expire_on_commit=False)
