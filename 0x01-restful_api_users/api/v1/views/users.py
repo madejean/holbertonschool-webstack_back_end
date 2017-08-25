@@ -18,5 +18,15 @@ def user(user_id):
     if user is None:
         return abort(404)
     else:
-        user.to_dict()
-        return jsonify(user)
+        d_user = user.to_dict()
+        return jsonify(d_user)
+
+@app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
+def delete_user(user_id):
+    user = db_session.query(User).get(user_id)
+    if user is None:
+        return abort(404)
+    else:
+        db_session.delete(user)
+        db_session.commit()
+        return jsonify()
