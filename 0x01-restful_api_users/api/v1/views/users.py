@@ -41,16 +41,17 @@ def create_user():
             return jsonify(error="email missing"), 400
         if password is None:
             return jsonify(error="password missing"), 400
-        if json.get('first_name') is None and json.get('last_name') is None:
+        try:
             newUser = User()
             newUser.email = json['email']
             newUser.password = json['password']
-        else:
-            newUser = User()
-            newUser.email = json['email']
-            newUser.password = json['password']
+        except:
+            return jsonify(error="Can't create User: <exception message>"), 400
+        if json.get('first_name'):
             newUser.first_name = json['first_name']
+        if json.get('last_name'):
             newUser.last_name = json['last_name']
+
         db_session.add(newUser)
         db_session.commit()
         created_user = User.last().to_dict()
