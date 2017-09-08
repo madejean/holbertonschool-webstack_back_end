@@ -21,7 +21,7 @@ def users():
     return jsonify(user_array)
 
 
-@app_views.route('/users/<user_id>', strict_slashes=False)
+@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def user(user_id):
     """
     retrieves a specific user
@@ -31,6 +31,7 @@ def user(user_id):
         return abort(404)
     else:
         d_user = user.to_dict()
+        return jsonify(d_user)
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
