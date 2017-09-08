@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-from flask import Flask
-
-app = Flask(__name__)
-
 """
 index route returns the string Holberton School
 """
+from flask import Flask
+
+app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
