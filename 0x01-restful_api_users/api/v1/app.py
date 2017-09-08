@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+creating flask instance
+"""
 from flask import Flask
 from flask import jsonify
 import os
@@ -12,9 +15,14 @@ HBNB_API_HOST = os.environ.get('HBNB_API_HOST')
 
 app.register_blueprint(app_views, url_prefix="/api/v1")
 
+
 @app.errorhandler(404)
 def page_not_found(e):
+    """
+    returns error response
+    """
     return jsonify(error="Not found"), 404
+
 
 @app.teardown_appcontext
 def close_db(error):

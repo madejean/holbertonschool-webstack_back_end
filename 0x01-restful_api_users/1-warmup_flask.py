@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/c', methods=['GET'], strict_slashes=False)
+@app.route('/c', strict_slashes=False)
 def C_is_fun():
     """
     returns the string C is fun!
