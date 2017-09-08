@@ -1,5 +1,12 @@
+#!/usr/bin/python3
 from flask import Flask
+
 app = Flask(__name__)
+
+"""
+index route returns the string Holberton School
+"""
+
 
 @app.route('/', strict_slashes=False)
 def holberton_School():
