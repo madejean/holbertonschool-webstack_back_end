@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@app.route('/', strict_slashes=False)
 def holberton_School():
     """
     returns the string C is fun!

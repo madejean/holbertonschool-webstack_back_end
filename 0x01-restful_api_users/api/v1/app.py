@@ -26,7 +26,9 @@ def page_not_found(e):
 
 @app.teardown_appcontext
 def close_db(error):
-    """Closes the database again at the end of the request."""
+    """
+    Closes the database again at the end of the request.
+    """
     db_session.remove()
 
 if __name__ == '__main__':
