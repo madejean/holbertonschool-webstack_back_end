@@ -8,6 +8,7 @@ from api.v1.views import app_views
 from models.user import User
 from models import db_session
 
+
 @app_views.route('/users', strict_slashes=False)
 def users():
     """
@@ -19,6 +20,7 @@ def users():
         user_array.append(user.to_dict())
     return jsonify(user_array)
 
+
 @app_views.route('/users/<user_id>', strict_slashes=False)
 def user(user_id):
     """
@@ -29,6 +31,7 @@ def user(user_id):
         return abort(404)
     else:
         d_user = user.to_dict()
+
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
@@ -42,6 +45,7 @@ def delete_user(user_id):
         db_session.delete(user)
         db_session.commit()
         return jsonify()
+
 
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
@@ -73,6 +77,7 @@ def create_user():
         return jsonify(created_user), 201
     else:
         return jsonify(error="Wrong format")
+
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
