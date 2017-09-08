@@ -77,7 +77,7 @@ def create_user():
         created_user = User.last().to_dict()
         return jsonify(created_user), 201
     else:
-        return jsonify(error="Wrong format")
+        return jsonify(error="Wrong format"), 400
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
