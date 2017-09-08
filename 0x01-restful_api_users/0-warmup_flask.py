@@ -8,9 +8,9 @@ index route returns the string Holberton School
 """
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/', methods=['GET'], strict_slashes=False)
 def holberton_School():
     return 'Holberton School'
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port="5000")

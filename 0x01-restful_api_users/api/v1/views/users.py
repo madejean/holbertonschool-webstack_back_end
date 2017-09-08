@@ -69,14 +69,8 @@ def update_user(user_id):
             user.first_name = json['first_name']
         if json.get('last_name'):
             user.last_name = json['last_name']
-<<<<<<< HEAD
-        db.session.commit()
-        d_user = user.to_dict()
-        return d_user
-=======
         db_session.commit()
         d_user = user.to_dict()
         return jsonify(d_user)
->>>>>>> e85dfbe32b2aedcfac8488ed32ce246508c70a44
     else:
         return jsonify(error="Wrong format"), 400
