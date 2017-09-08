@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    index route
+index route
 """
 from flask import Flask
 

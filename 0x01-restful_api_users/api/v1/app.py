@@ -13,6 +13,7 @@ app = Flask(__name__)
 HBNB_API_PORT = os.environ.get('HBNB_API_PORT')
 HBNB_API_HOST = os.environ.get('HBNB_API_HOST')
 
+"""registering the blueprint"""
 app.register_blueprint(app_views, url_prefix="/api/v1")
 
 
