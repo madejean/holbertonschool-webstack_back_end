@@ -9,7 +9,7 @@ from models.user import User
 from models import db_session
 
 
-@app_views.route('/users', strict_slashes=False)
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
 def users():
     """
     returns list of users
