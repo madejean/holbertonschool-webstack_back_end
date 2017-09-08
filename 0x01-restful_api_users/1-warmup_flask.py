@@ -1,15 +1,17 @@
 #!/usr/bin/python3
+
 from flask import Flask
+
 app = Flask(__name__)
 
-"""
-route /c returns the string C is fun!
-"""
 
-
-@app.route('/c', strict_slashes=False)
+@app.route('/c', methods=['GET'], strict_slashes=False)
 def C_is_fun():
+    """
+    route /c returns the string C is fun!
+    """
     return 'C is fun!'
 
+"""not executed when imported"""
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)

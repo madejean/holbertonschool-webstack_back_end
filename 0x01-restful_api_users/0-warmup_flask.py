@@ -5,12 +5,11 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET'], strict_slashes=False)
 def holberton_School():
     """
     index route returns the string Holberton School
     """
-    app.url_map.strict_slashes = False
     return 'Holberton School'
 
 
