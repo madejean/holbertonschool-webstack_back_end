@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+creating user routes
+"""
 from flask import Flask
 from flask import jsonify, abort, request
 from api.v1.views import app_views
@@ -7,6 +10,9 @@ from models import db_session
 
 @app_views.route('/users', strict_slashes=False)
 def users():
+    """
+    returns list of users
+    """
     users = User.all()
     user_array = []
     for user in users:
@@ -15,6 +21,9 @@ def users():
 
 @app_views.route('/users/<user_id>', strict_slashes=False)
 def user(user_id):
+    """
+    retrieves a specific user
+    """
     user = db_session.query(User).get(user_id)
     if user is None:
         return abort(404)
@@ -23,6 +32,9 @@ def user(user_id):
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
+    """
+    retrieves an user and deletes it
+    """
     user = db_session.query(User).get(user_id)
     if user is None:
         return abort(404)
@@ -33,6 +45,9 @@ def delete_user(user_id):
 
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
+    """
+    creates an user
+    """
     if request.get_json():
         json = request.get_json()
         email = json.get('email')
@@ -61,6 +76,9 @@ def create_user():
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
+    """
+    updates an user
+    """
     user = db_session.query(User).get(user_id)
     if user is None:
         return abort(404)

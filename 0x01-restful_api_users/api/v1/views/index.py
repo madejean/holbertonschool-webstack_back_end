@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-creating new routes
+creating status routes
 """
 from flask import Flask
 from flask import jsonify
