@@ -19,7 +19,6 @@ def user(user_id):
         return abort(404)
     else:
         d_user = user.to_dict()
-        return jsonify(d_user)
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
@@ -41,19 +40,37 @@ def create_user():
             return jsonify(error="email missing"), 400
         if password is None:
             return jsonify(error="password missing"), 400
-        if json.get('first_name') is None and json.get('last_name') is None:
+        try:
             newUser = User()
             newUser.email = json['email']
             newUser.password = json['password']
-        else:
-            newUser = User()
-            newUser.email = json['email']
-            newUser.password = json['password']
+        except:
+            return jsonify(error="Can't create User: <exception message>"), 400
+        if json.get('first_name'):
             newUser.first_name = json['first_name']
+        if json.get('last_name'):
             newUser.last_name = json['last_name']
+
         db_session.add(newUser)
         db_session.commit()
         created_user = User.last().to_dict()
         return jsonify(created_user), 201
     else:
         return jsonify(error="Wrong format")
+
+@app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
+def update_user(user_id):
+    user = db_session.query(User).get(user_id)
+    if user is None:
+        return abort(404)
+    if request.get_json():
+        json = request.get_json()
+        if json.get('first_name'):
+            user.first_name = json['first_name']
+        if json.get('last_name'):
+            user.last_name = json['last_name']
+        db.session.commit()
+        d_user = user.to_dict()
+        return d_user
+    else:
+        return jsonify(error="Wrong format"), 400
