@@ -5,7 +5,7 @@ creating flask instance
 from flask import Flask
 from flask import jsonify
 import os
-from .views import app_views
+from api.v1.views import app_views
 from models import db_session
 
 app = Flask(__name__)
