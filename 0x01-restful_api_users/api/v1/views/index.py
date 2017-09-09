@@ -13,9 +13,7 @@ def status():
     """
     returns OK status
     """
-    return {
-        "status": "ok"
-    }
+    return jsonify(status="OK")
 
 
 @app_views.route('/stats', strict_slashes=False)

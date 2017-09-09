@@ -4,6 +4,9 @@ creating a Blueprint instance
 """
 from flask import Blueprint
 
+"""
+creating blueprint instance
+"""
 app_views = Blueprint('app_views', __name__, url_prefix="/api/v1")
 
 from api.v1.views.index import *
