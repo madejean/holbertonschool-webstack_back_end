@@ -23,9 +23,18 @@ def stats():
     """
     return jsonify(users=User.count())
 
+
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized():
     """
-    aborts on 401 status code
+    aborts on 401 unauthorized status code
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden():
+    """
+    aborts on 403 forbidden status code
+    """
+    return abort(403)

@@ -33,6 +33,14 @@ def request_unauthorized(e):
     return jsonify(error="Unauthorized"), 401
 
 
+@app.errorhandler(403)
+def request_Forbidden(e):
+    """
+    returns error Forbidden response
+    """
+    return jsonify(error="Forbidden"), 403
+
+
 @app.teardown_appcontext
 def close_db(error):
     """
