@@ -8,12 +8,14 @@ import sys
 import os
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
+from api.v1.auth.basic_auth import BasicAuth
 from models import db_session
 
 app = Flask(__name__)
 
 HBNB_API_PORT = os.environ.get('HBNB_API_PORT')
 HBNB_API_HOST = os.environ.get('HBNB_API_HOST')
+HBNB_YELP_AUTH = os.environ.get('HBNB_YELP_AUTH')
 
 """registering the blueprint"""
 app.register_blueprint(app_views, url_prefix="/api/v1")
@@ -51,16 +53,15 @@ def close_db(error):
 
 @app.before_request
 def before_request():
-    auth = Auth()
-    print(auth.require_auth(request.path, ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']), file=sys.stderr)
+    if BasicAuth == HBNB_YELP_AUTH:
+        auth = BasicAuth()
+    else:
+        auth = Auth()
     if not auth.require_auth(request.path, ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']):
-        print("THIS", file=sys.stderr)
         return None
     elif auth.authorization_header(request) is None:
-        print("THAT", file=sys.stderr)
         return abort(401)
     elif auth.current_user(request) is None:
-        print("MUCHOS", file=sys.stderr)
         return abort(403)
 
 

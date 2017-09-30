@@ -3,7 +3,7 @@
 creating API authentication
 """
 from flask import Flask
-import sys
+
 
 class Auth():
      def require_auth(self, path, excluded_paths):
@@ -17,7 +17,7 @@ class Auth():
              return True
 
      def authorization_header(self, request=None):
-         if request is None or request.headers['Authorization'] is None:
+         if request is None or request.headers.get('Authorization') is None:
              return None
          else:
              return request.headers['Authorization']
