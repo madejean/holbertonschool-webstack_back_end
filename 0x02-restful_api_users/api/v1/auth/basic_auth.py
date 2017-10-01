@@ -36,9 +36,10 @@ class BasicAuth(Auth):
         if user_email is None or user_pwd is None or type(user_email) != str or type(user_pwd) != str:
             return None
         from models import db_session
-        user = db_session.query(User).filter(User.email == user_email)
-        print("THIS {}".format(user))
-        """if user is None or user.is_valid_password(user_pwd) is False:
-            return None"""
-        """else:
-            return user"""
+        for user in db_session.query(User).filter(User.email == user_email):
+            if not user:
+                return None
+            elif user.is_valid_password(user_pwd) is False:
+                return None
+            else:
+                return user
