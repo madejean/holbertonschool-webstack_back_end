@@ -8,24 +8,43 @@ from models.user import User
 from models import db_session
 import base64
 
+
 class BasicAuth(Auth):
-    def extract_base64_authorization_header(self, authorization_header):
-        if authorization_header is None or type(authorization_header) != str or not "Basic" in authorization_header:
+    """
+        Creating BasicAuth class inheriting from Auth
+    """
+    def extract_base64_authorization_header(
+            self, authorization_header):
+        """validates authorization header"""
+        if authorization_header is None or type(authorization_header) != str:
+            return None
+        elif "Basic" not in authorization_header:
             return None
         else:
             return authorization_header.split()[-1]
 
-    def decode_base64_authorization_header(self, base64_authorization_header):
-        if base64_authorization_header is None or type(base64_authorization_header) != str:
+    def decode_base64_authorization_header(
+            self, base64_authorization_header):
+        """decodes base64 value"""
+        if base64_authorization_header is None:
+            return None
+        elif type(base64_authorization_header) != str:
             return None
         try:
             if base64.b64decode(base64_authorization_header):
-                return base64.b64decode(base64_authorization_header).decode('utf-8')
+                return base64.b64decode(
+                    base64_authorization_header
+                    ).decode('utf-8')
         except:
             return None
 
     def extract_user_credentials(self, decoded_base64_authorization_header):
-        if decoded_base64_authorization_header is None or type(decoded_base64_authorization_header) != str or not ":" in decoded_base64_authorization_header:
+        """retrieves decoded email and password"""
+        if decoded_base64_authorization_header is None:
+            return None, None
+        elif type(decoded_base64_authorization_header) != str:
+            return None, None
+        elif ":" not in decoded_base64_authorization_header:
             return None, None
         else:
             email = decoded_base64_authorization_header.split(':')[0]
@@ -33,7 +52,10 @@ class BasicAuth(Auth):
             return email, password
 
     def user_object_from_credentials(self, user_email, user_pwd):
-        if user_email is None or user_pwd is None or type(user_email) != str or type(user_pwd) != str:
+        """queries the database to get the user"""
+        if user_email is None or user_pwd is None:
+            return None
+        elif type(user_email) != str or type(user_pwd) != str:
             return None
         from models import db_session
         for user in db_session.query(User).filter(User.email == user_email):
@@ -45,11 +67,16 @@ class BasicAuth(Auth):
                 return user
 
     def current_user(self, request=None):
+        """connecting all methods for Basic authentication"""
         authorization_header = self.authorization_header(request)
-        base64Val = self.extract_base64_authorization_header(authorization_header)
-        decodedbase64 =  self.decode_base64_authorization_header(base64Val)
+        base64Val = self.extract_base64_authorization_header(
+            authorization_header
+        )
+        decodedbase64 = self.decode_base64_authorization_header(base64Val)
         extracted_credentials = self.extract_user_credentials(decodedbase64)
         user_email = extracted_credentials[0]
         user_password = extracted_credentials[-1]
-        retrieved_user = self.user_object_from_credentials(user_email, user_password)
+        retrieved_user = self.user_object_from_credentials(
+            user_email, user_password
+        )
         return retrieved_user
