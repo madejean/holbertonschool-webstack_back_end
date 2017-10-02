@@ -8,7 +8,6 @@ import sys
 import os
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
-from api.v1.auth.basic_auth import BasicAuth
 from models import db_session
 
 app = Flask(__name__)
@@ -59,6 +58,7 @@ def before_request():
     before_request function to filter bad requests
     """
     if HBNB_YELP_AUTH == 'basic_auth':
+        from api.v1.auth.basic_auth import BasicAuth
         auth = BasicAuth()
     else:
         auth = Auth()
@@ -67,6 +67,10 @@ def before_request():
             ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
             ):
         return None
+    elif auth.authorization_header(request) is None:
+        return abort(401)
+    elif auth.current_user(request) is None:
+        return abort(403)
 
 
 if __name__ == '__main__':
