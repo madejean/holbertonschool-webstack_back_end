@@ -69,6 +69,5 @@ def before_request():
         return None
 
 
-
 if __name__ == '__main__':
     app.run(port=HBNB_API_PORT, host=HBNB_API_HOST)

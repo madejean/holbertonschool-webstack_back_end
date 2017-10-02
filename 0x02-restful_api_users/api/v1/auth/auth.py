@@ -11,11 +11,13 @@ class Auth():
     """
     def require_auth(self, path, excluded_paths):
         """filter routes that do not need auth"""
-        if path is None or excluded_paths is None:
+        if path is None:
             return True
-        if path in excluded_paths:
+        elif excluded_paths is None and or excluded_paths is []:
+            return True
+        elif path in excluded_paths:
             return False
-        if path == "/api/v1/status" or path == "/api/v1/status/":
+        elif path == "/api/v1/status" or path == "/api/v1/status/":
             return False
         else:
             return True
