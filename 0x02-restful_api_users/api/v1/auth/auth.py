@@ -15,7 +15,7 @@ class Auth():
             return True
         if path in excluded_paths:
             return False
-        if path == "/api/v1/status" or path == "/api/v1/status/":
+        if path == "/api/v1/status" or path == "/api/v1/status/" and path in excluded_paths:
             return False
         else:
             return True
