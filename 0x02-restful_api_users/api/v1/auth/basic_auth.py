@@ -43,3 +43,13 @@ class BasicAuth(Auth):
                 return None
             else:
                 return user
+
+    def current_user(self, request=None):
+        authorization_header = self.authorization_header(request)
+        base64Val = self.extract_base64_authorization_header(authorization_header)
+        decodedbase64 =  self.decode_base64_authorization_header(base64Val)
+        extracted_credentials = self.extract_user_credentials(decodedbase64)
+        user_email = extracted_credentials[0]
+        user_password = extracted_credentials[-1]
+        retrieved_user = self.user_object_from_credentials(user_email, user_password)
+        return retrieved_user

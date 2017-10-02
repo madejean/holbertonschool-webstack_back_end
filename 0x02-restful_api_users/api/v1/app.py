@@ -53,7 +53,7 @@ def close_db(error):
 
 @app.before_request
 def before_request():
-    if BasicAuth == HBNB_YELP_AUTH:
+    if HBNB_YELP_AUTH == 'basic_auth':
         auth = BasicAuth()
     else:
         auth = Auth()
