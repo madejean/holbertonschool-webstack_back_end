@@ -67,10 +67,7 @@ def before_request():
             ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
             ):
         return None
-    elif auth.authorization_header(request) is None:
-        return abort(401)
-    elif auth.current_user(request) is None:
-        return abort(403)
+
 
 
 if __name__ == '__main__':
