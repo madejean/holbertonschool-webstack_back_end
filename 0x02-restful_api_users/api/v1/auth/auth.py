@@ -13,7 +13,7 @@ class Auth():
         """filter routes that do not need auth"""
         if path is None:
             return True
-        elif excluded_paths is None or excluded_paths is []:
+        elif excluded_paths is None or len(excluded_paths) == 0:
             return True
         elif path in excluded_paths:
             return False
