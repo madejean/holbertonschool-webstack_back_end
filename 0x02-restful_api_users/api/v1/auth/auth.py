@@ -11,7 +11,7 @@ class Auth():
     """
     def require_auth(self, path, excluded_paths):
         """
-        filter routes that do not need auth
+            filter routes that do not need auth
         """
         if path is None:
             return True
@@ -28,7 +28,7 @@ class Auth():
 
     def authorization_header(self, request=None):
         """
-        validates request authentication
+            validates request authentication
         """
         if request is None:
             return None
@@ -39,6 +39,6 @@ class Auth():
 
     def current_user(self, request=None):
         """
-        defined in Basic Auth child class
+            defined in Basic Auth child class
         """
         return None

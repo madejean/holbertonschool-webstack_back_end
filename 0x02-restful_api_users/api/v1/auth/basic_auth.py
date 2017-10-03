@@ -15,7 +15,9 @@ class BasicAuth(Auth):
     """
     def extract_base64_authorization_header(
             self, authorization_header):
-        """validates authorization header"""
+        """
+            validates authorization header
+        """
         if authorization_header is None or type(authorization_header) != str:
             return None
         elif "Basic" not in authorization_header:
@@ -24,8 +26,10 @@ class BasicAuth(Auth):
             return authorization_header.split("Basic ", 1)[1]
 
     def decode_base64_authorization_header(
-            self, base64_authorization_header):
-        """decodes base64 value"""
+        self, base64_authorization_header):
+        """
+            decodes base64 value
+        """
         if base64_authorization_header is None:
             return None
         elif type(base64_authorization_header) != str:
@@ -40,7 +44,9 @@ class BasicAuth(Auth):
                 ).decode('utf-8')
 
     def extract_user_credentials(self, decoded_base64_authorization_header):
-        """retrieves decoded email and password"""
+        """
+            retrieves decoded email and password
+        """
         if decoded_base64_authorization_header is None:
             return None, None
         elif type(decoded_base64_authorization_header) != str:
@@ -53,7 +59,9 @@ class BasicAuth(Auth):
             return email, password
 
     def user_object_from_credentials(self, user_email, user_pwd):
-        """queries the database to get the user"""
+        """
+            queries the database to get the user
+        """
         from models import db_session
         if user_email is None or type(user_email) != str:
             return None
@@ -68,7 +76,9 @@ class BasicAuth(Auth):
                 return user
 
     def current_user(self, request=None):
-        """connecting all methods for Basic authentication"""
+        """
+            connecting all methods for Basic authentication
+        """
         authorization_header = self.authorization_header(request)
         base64Val = self.extract_base64_authorization_header(
             authorization_header
