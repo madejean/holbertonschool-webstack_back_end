@@ -62,11 +62,11 @@ def before_request():
         auth = BasicAuth()
     else:
         auth = Auth()
-    if not auth.require_auth(
+    if auth.require_auth(
             request.path,
             ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-            ):
-        return None
+            ) is False:
+        return
     elif auth.authorization_header(request) is None:
         return abort(401)
     elif auth.current_user(request) is None:
