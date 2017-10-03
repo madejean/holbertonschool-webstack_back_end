@@ -31,12 +31,12 @@ class BasicAuth(Auth):
         elif type(base64_authorization_header) != str:
             return None
         try:
-            if base64.b64decode(base64_authorization_header):
-                return base64.b64decode(
-                    base64_authorization_header
-                    ).decode('utf-8')
+            base64.b64decode(base64_authorization_header)
         except:
             return None
+        return base64.b64decode(
+            base64_authorization_header
+            ).decode('utf-8')
 
     def extract_user_credentials(self, decoded_base64_authorization_header):
         """retrieves decoded email and password"""
