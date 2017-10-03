@@ -53,15 +53,15 @@ class BasicAuth(Auth):
 
     def user_object_from_credentials(self, user_email, user_pwd):
         """queries the database to get the user"""
-        if user_email is None or user_pwd is None:
-            return None
-        elif type(user_email) != str or type(user_pwd) != str:
-            return None
         from models import db_session
+        if user_email is None or type(user_email) != str:
+            return None
+        elif user_email is None or type(user_pwd) != str:
+            return None
         for user in db_session.query(User).filter(User.email == user_email):
             if not user:
                 return None
-            elif user.is_valid_password(user_pwd) is False:
+            elif not user.is_valid_password(user_pwd):
                 return None
             else:
                 return user
