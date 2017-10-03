@@ -68,9 +68,9 @@ def before_request():
             ) is False:
         return
     elif auth.authorization_header(request) is None:
-        return abort(401)
+        abort(401)
     elif auth.current_user(request) is None:
-        return abort(403)
+        abort(403)
 
 
 if __name__ == '__main__':
