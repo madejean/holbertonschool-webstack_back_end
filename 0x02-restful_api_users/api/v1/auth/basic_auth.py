@@ -18,7 +18,9 @@ class BasicAuth(Auth):
         """
             validates authorization header
         """
-        if authorization_header is None or type(authorization_header) != str:
+        if authorization_header is None:
+            return None
+        elif type(authorization_header) != str:
             return None
         elif "Basic" not in authorization_header:
             return None
