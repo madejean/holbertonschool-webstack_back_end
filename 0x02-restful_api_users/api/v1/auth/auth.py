@@ -10,7 +10,9 @@ class Auth():
         Creating Auth parent class
     """
     def require_auth(self, path, excluded_paths):
-        """filter routes that do not need auth"""
+        """
+        filter routes that do not need auth
+        """
         if path is None:
             return True
         elif excluded_paths is None or len(excluded_paths) == 0:
@@ -25,12 +27,18 @@ class Auth():
             return True
 
     def authorization_header(self, request=None):
-        """validates request authentication"""
-        if request is None or request.headers.get('Authorization') is None:
+        """
+        validates request authentication
+        """
+        if request is None:
+            return None
+        elif request.headers.get('Authorization') is None:
             return None
         else:
             return request.headers['Authorization']
 
     def current_user(self, request=None):
-        """defined in Basic Auth child class"""
+        """
+        defined in Basic Auth child class
+        """
         return None
