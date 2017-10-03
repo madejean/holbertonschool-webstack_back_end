@@ -21,7 +21,7 @@ class BasicAuth(Auth):
         elif "Basic" not in authorization_header:
             return None
         else:
-            return authorization_header.split()[-1]
+            return authorization_header.split("Basic ",1)[1]
 
     def decode_base64_authorization_header(
             self, base64_authorization_header):
