@@ -20,6 +20,11 @@ HBNB_YELP_AUTH = os.environ.get('HBNB_YELP_AUTH')
 """registering the blueprint"""
 app.register_blueprint(app_views, url_prefix="/api/v1")
 
+"""setting auth based on environment variables"""
+if HBNB_YELP_AUTH == 'basic_auth':
+    auth = BasicAuth()
+else:
+    auth = Auth()
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -58,10 +63,6 @@ def before_request():
     """
     before_request function to filter bad requests
     """
-    if HBNB_YELP_AUTH == 'basic_auth':
-        auth = BasicAuth()
-    else:
-        auth = Auth()
     if auth.require_auth(
             request.path,
             ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
