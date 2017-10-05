@@ -26,6 +26,7 @@ if HBNB_YELP_AUTH == 'basic_auth':
 else:
     auth = Auth()
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     """
