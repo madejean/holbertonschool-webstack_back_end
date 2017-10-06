@@ -8,6 +8,7 @@ from models.user import User
 from models import db_session
 import base64
 
+
 class BasicAuth(Auth):
     """
         Creating BasicAuth class inheriting from Auth
@@ -35,7 +36,9 @@ class BasicAuth(Auth):
         elif type(base64_authorization_header) != str:
             return None
         try:
-            base64.b64decode(base64_authorization_header)
+            base64.b64decode(base64_authorization_header.encode('utf-8')
+                ).decode('utf-8')
+
         except:
             return None
         else:
