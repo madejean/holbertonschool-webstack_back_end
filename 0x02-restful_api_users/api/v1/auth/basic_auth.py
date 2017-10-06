@@ -8,7 +8,6 @@ from models.user import User
 from models import db_session
 import base64
 
-
 class BasicAuth(Auth):
     """
         Creating BasicAuth class inheriting from Auth
@@ -42,7 +41,7 @@ class BasicAuth(Auth):
         else:
             return base64.b64decode(
                 base64_authorization_header.encode('utf-8')
-                ).decode('utf-8')
+            ).decode('utf-8')
 
     def extract_user_credentials(self, decoded_base64_authorization_header):
         """
@@ -56,7 +55,8 @@ class BasicAuth(Auth):
             return None, None
         else:
             email = decoded_base64_authorization_header.split(':')[0]
-            password = decoded_base64_authorization_header.split(':')[-1]
+            index = decoded_base64_authorization_header.find(':')
+            password = decoded_base64_authorization_header[index+1:]
             return email, password
 
     def user_object_from_credentials(self, user_email, user_pwd):
