@@ -26,6 +26,10 @@ def user(user_id):
     """
     retrieves a specific user
     """
+    if user_id == me and request.current_user is None:
+        return abort(404)
+    if user_id == me and request.current_user:
+        return me
     user = db_session.query(User).get(user_id)
     if user is None:
         return abort(404)
@@ -76,6 +80,7 @@ def create_user():
         db_session.commit()
         created_user = User.last().to_dict()
         return jsonify(created_user), 201
+
     else:
         return jsonify(error="Wrong format"), 400
 
@@ -99,3 +104,10 @@ def update_user(user_id):
         return jsonify(d_user)
     else:
         return jsonify(error="Wrong format"), 400
+
+
+@app_views.route('/users/me', methods=['GET'], strict_slashes=False)
+def me():
+    user = db_session.query(User).get(request.current_user.id)
+    d_user = user.to_dict()
+    return jsonify(d_user)
