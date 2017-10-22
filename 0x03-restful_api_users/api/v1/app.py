@@ -9,6 +9,7 @@ import os
 from api.v1.views import app_views
 from api.v1.auth.auth import Auth
 from api.v1.auth.basic_auth import BasicAuth
+from api.v1.auth.session_auth import SessionAuth
 from models import db_session
 
 app = Flask(__name__)
@@ -21,7 +22,9 @@ HBNB_YELP_AUTH = os.environ.get('HBNB_YELP_AUTH')
 app.register_blueprint(app_views, url_prefix="/api/v1")
 
 """setting auth based on environment variables"""
-if HBNB_YELP_AUTH == 'basic_auth':
+if HBNB_YELP_AUTH == 'session_auth':
+    auth = SessionAuth()
+elif HBNB_YELP_AUTH == 'basic_auth':
     auth = BasicAuth()
 else:
     auth = Auth()
@@ -66,10 +69,10 @@ def before_request():
     """
     if auth.require_auth(
             request.path,
-            ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+            ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/', '/api/v1/auth_session/login/']
             ) is False:
         return
-    elif auth.authorization_header(request) is None:
+    if auth.authorization_header(request) is None and auth.session_cookie(request) is None:
         abort(401)
     elif auth.current_user(request) is None:
         abort(403)

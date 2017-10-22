@@ -2,7 +2,8 @@
 """
 creating API authentication
 """
-from flask import Flask
+from flask import Flask, request
+import os
 
 
 class Auth():
@@ -42,3 +43,9 @@ class Auth():
             defined in Basic Auth child class
         """
         return None
+
+    def session_cookie(self, request=None):
+        HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
+        if request is None:
+            return None
+        return request.cookies.get(HBNB_YELP_SESSION_NAME)
