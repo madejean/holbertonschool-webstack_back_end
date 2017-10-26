@@ -4,6 +4,7 @@ creating session Authentication routes
 """
 from flask import Flask
 from flask import jsonify, abort, request, session
+import os
 from api.v1.views import app_views
 from api.v1.app import auth
 from models.user import User
@@ -26,8 +27,10 @@ def login():
         return jsonify(error="no user found for this email"), 404
     if user.is_valid_password(password) is False:
         return jsonify(error="wrong password"), 401
-    user_id = user.id
-    sessionID = auth.create_session(user_id)
+    sessionID = auth.create_session(user.id)
+    print(sessionID)
     d_user = user.to_dict()
-    session[HBNB_YELP_SESSION_NAME] = HBNB_YELP_SESSION_NAME
+    HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
+    response = jsonify(state=0, msg='success')
+    response.set_cookie(HBNB_YELP_SESSION_NAME, sessionID)
     return jsonify(d_user)
