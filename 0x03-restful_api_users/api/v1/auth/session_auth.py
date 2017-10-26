@@ -2,7 +2,7 @@
 """
 creating Basic authentication
 """
-from flask import Flask
+from flask import Flask, jsonify, abort, request
 from api.v1.auth.auth import Auth
 from models.user import User
 from models import db_session
@@ -32,6 +32,8 @@ class SessionAuth(Auth):
     def current_user(self, request=None):
         session_id = self.session_cookie(request)
         user_id = self.user_id_for_session_id(session_id)
+        if user_id is None:
+            return abort(403)
         user = db_session.query(User).get(user_id)
         return user
 
