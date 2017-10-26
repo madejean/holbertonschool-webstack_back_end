@@ -14,7 +14,7 @@ from models import db_session
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
     """
-    returns  status
+    login route
     """
     email = request.form.get('email')
     password = request.form.get('password')
@@ -34,3 +34,14 @@ def login():
     response = jsonify(state=0, msg='success')
     response.set_cookie(HBNB_YELP_SESSION_NAME, sessionID)
     return jsonify(d_user)
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """
+    logout route
+    """
+    clear_session = auth.destroy_session(request)
+    if clear_session is False:
+        return abort(404)
+    else:
+        return jsonify({}), 200
