@@ -41,6 +41,7 @@ def logout():
     logout route
     """
     clear_session = auth.destroy_session(request)
+    print(clear_session)
     if clear_session is False:
         return abort(404)
     else:

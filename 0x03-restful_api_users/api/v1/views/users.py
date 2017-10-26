@@ -109,5 +109,7 @@ def update_user(user_id):
 @app_views.route('/users/me', methods=['GET'], strict_slashes=False)
 def me():
     user = db_session.query(User).get(request.current_user.id)
+    if user is None:
+        return abort(404)
     d_user = user.to_dict()
     return jsonify(d_user)
