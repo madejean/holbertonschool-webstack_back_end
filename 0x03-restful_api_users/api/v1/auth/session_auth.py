@@ -50,7 +50,6 @@ class SessionAuth(Auth):
         """
             method to erase session
         """
-        print(self.session_cookie(request))
         if request is None:
             return False
         if self.session_cookie(request) is None:
