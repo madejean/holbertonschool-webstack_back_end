@@ -29,6 +29,8 @@ def user(user_id):
     if user_id == me and request.current_user is None:
         return abort(404)
     if user_id == me and request.current_user:
+        return me
+    else:
         user = db_session.query(User).get(user_id)
         if user is None:
             return abort(404)
