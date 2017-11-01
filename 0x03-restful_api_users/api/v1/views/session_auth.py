@@ -28,7 +28,6 @@ def login():
     if user.is_valid_password(password) is False:
         return jsonify(error="wrong password"), 401
     sessionID = auth.create_session(user.id)
-    print(sessionID)
     d_user = user.to_dict()
     HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
     response = jsonify(state=0, msg='success')
@@ -43,7 +42,6 @@ def logout():
     logout route
     """
     clear_session = auth.destroy_session(request)
-    print(clear_session)
     if clear_session is False:
         return abort(404)
     else:

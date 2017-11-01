@@ -20,8 +20,8 @@ class Auth():
             return True
         elif not path.endswith('/'):
             path = path + '/'
-            if path in excluded_paths:
-                return False
+        if path in excluded_paths:
+            return False
         elif path == "/api/v1/status" or path == "/api/v1/status/":
             return False
         else:
