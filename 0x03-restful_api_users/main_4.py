@@ -23,6 +23,7 @@ print("User with ID: {} has a Session ID: {}".format(user.id, session_id))
 """ Create a Flask app """
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def root_path():
     """ Root path
