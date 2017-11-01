@@ -45,6 +45,9 @@ class Auth():
         return None
 
     def session_cookie(self, request=None):
+        """
+            method to get session cookie
+        """
         HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
         if request is None:
             return None

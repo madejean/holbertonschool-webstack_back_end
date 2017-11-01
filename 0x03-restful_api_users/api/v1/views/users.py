@@ -108,6 +108,9 @@ def update_user(user_id):
 
 @app_views.route('/users/me', methods=['GET'], strict_slashes=False)
 def me():
+    """
+    gets signed user
+    """
     user = db_session.query(User).get(request.current_user.id)
     if user is None:
         return abort(404)

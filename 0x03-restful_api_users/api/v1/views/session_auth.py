@@ -35,7 +35,9 @@ def login():
     response.set_cookie(HBNB_YELP_SESSION_NAME, sessionID)
     return jsonify(d_user)
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route('/auth_session/logout',
+                 methods=['DELETE'], strict_slashes=False)
 def logout():
     """
     logout route
