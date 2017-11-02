@@ -5,6 +5,8 @@ creating API authentication
 from flask import Flask, request
 import os
 
+HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
+
 
 class Auth():
     """
@@ -48,7 +50,6 @@ class Auth():
         """
             method to get session cookie
         """
-        HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
         if request is None:
             return None
         return request.cookies.get(HBNB_YELP_SESSION_NAME)
