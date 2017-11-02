@@ -28,12 +28,11 @@ def login():
     if user.is_valid_password(password) is False:
         return jsonify(error="wrong password"), 401
     sessionID = auth.create_session(user.id)
-    d_user = user.to_dict()
     HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
-    out = jsonify(state=0, msg='success')
+    d_user = user.to_dict()
+    out = jsonify(d_user)
     out.set_cookie(HBNB_YELP_SESSION_NAME, sessionID)
     return out
-    return jsonify(d_user)
 
 
 @app_views.route('/auth_session/logout',
