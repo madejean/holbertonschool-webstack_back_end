@@ -3,6 +3,7 @@
 creating Basic authentication
 """
 from flask import Flask, jsonify, abort, request
+from api.v1.auth.auth import Auth
 from models.user import User
 from models import db_session
 import uuid
