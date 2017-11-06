@@ -6,6 +6,7 @@ from flask import Flask
 from flask import jsonify, abort, request, session
 import os
 from api.v1.views import app_views
+import api.v1.app as app
 from models.user import User
 from models import db_session
 
@@ -26,7 +27,7 @@ def login():
         return jsonify(error="no user found for this email"), 404
     if user.is_valid_password(password) is False:
         return jsonify(error="wrong password"), 401
-    sessionID = auth.create_session(user.id)
+    sessionID = app.auth.create_session(user.id)
     HBNB_YELP_SESSION_NAME = os.environ.get('HBNB_YELP_SESSION_NAME')
     d_user = user.to_dict()
     out = jsonify(d_user)
@@ -40,7 +41,7 @@ def logout():
     """
     logout route
     """
-    clear_session = auth.destroy_session(request)
+    clear_session = app.auth.destroy_session(request)
     if clear_session is False:
         return abort(404)
     else:
