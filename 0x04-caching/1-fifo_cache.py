@@ -5,7 +5,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class FIFOCache(BaseCaching):
     def __init__(self):
-        super(FIFOCache, self).__init__()
+        super().__init__()
 
     def put(self, key, item):
         if not key or not item:
