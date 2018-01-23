@@ -7,14 +7,23 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
+    """ LRUCache defines:
+        - caching system with last recently used algorithm
+    """
+
     def __init__(self):
+        """ defines overloading method """
         super().__init__()
-        self.tm = 0
+        self.tmp = 0
         self.lru = {}
 
     def put(self, key, item):
+        """ assigns key value to cache_data dictionary
+            if cache_data dictionary exceeds its limit
+            the last recently used item gets removed
+        """
         if key is None or item is None:
-            pass
+            return
         if(len(self.cache_data) >= self.MAX_ITEMS and
                 key not in self.cache_data):
             p = min(self.lru.keys(), key=lambda k: self.lru[k])
@@ -22,12 +31,13 @@ class LRUCache(BaseCaching):
             self.lru.pop(p)
             print("DISCARD", p)
         self.cache_data[key] = item
-        self.lru[key] = self.tm
-        self.tm += 1
+        self.lru[key] = self.tmp
+        self.tmp += 1
 
     def get(self, key):
+        """ retrieves the value linked to the key """
         if key is None or key not in self.cache_data:
             return None
-        self.lru[key] = self.tm
-        self.tm += 1
+        self.lru[key] = self.tmp
+        self.tmp += 1
         return self.cache_data[key]
