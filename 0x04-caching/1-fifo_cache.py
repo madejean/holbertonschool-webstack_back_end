@@ -14,7 +14,7 @@ class FIFOCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
-        """ assign key value to cache_data dictionary
+        """ assigns key value to cache_data dictionary
             if cache_data dictionary exceeds its limit
             the first item gets removed
         """
