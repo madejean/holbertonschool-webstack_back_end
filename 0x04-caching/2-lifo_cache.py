@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ LIFOCache
 """
-import queue
 
 BaseCaching = __import__('base_caching').BaseCaching
 
@@ -14,7 +13,7 @@ class LIFOCache(BaseCaching):
     def __init__(self):
         """ defining overloading method """
         super().__init__()
-        self.queue = list()
+        self.queue = []
 
     def put(self, key, item):
         """ assigns key value to cache_data dictionary

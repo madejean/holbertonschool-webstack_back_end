@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ LRUCache
 """
-import queue
 
 BaseCaching = __import__('base_caching').BaseCaching
 
