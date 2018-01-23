@@ -3,10 +3,13 @@
 """
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class BasicCache(BaseCaching):
+
     """ BasicCache defines:
         - caching system
     """
+
     def put(self, key, item):
         """ assign key value to cache_data dictionary """
         if not key or not item:

@@ -5,6 +5,7 @@ import queue
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class LRUCache(BaseCaching):
     def __init__(self):
         super().__init__()
@@ -14,8 +15,9 @@ class LRUCache(BaseCaching):
     def put(self, key, item):
         if key is None or item is None:
             pass
-        if(len(self.cache_data) >= self.MAX_ITEMS and key not in self.cache_data):
-            p = min(self.lru.keys(), key=lambda k:self.lru[k])
+        if(len(self.cache_data) >= self.MAX_ITEMS and
+                key not in self.cache_data):
+            p = min(self.lru.keys(), key=lambda k: self.lru[k])
             self.cache_data.pop(p)
             self.lru.pop(p)
             print("DISCARD", p)

@@ -5,6 +5,7 @@ import queue
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class MRUCache(BaseCaching):
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class MRUCache(BaseCaching):
         if key is None or item is None:
             pass
         if(len(self.cache_data) >= self.MAX_ITEMS):
-            p = max(self.mru.keys(), key=lambda k:self.mru[k])
+            p = max(self.mru.keys(), key=lambda k: self.mru[k])
             self.cache_data.pop(p)
             self.mru.pop(p)
             print("DISCARD", p)

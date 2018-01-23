@@ -5,6 +5,7 @@ import queue
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class LIFOCache(BaseCaching):
     def __init__(self):
         super().__init__()
