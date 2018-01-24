@@ -28,7 +28,7 @@ class LRUCache(BaseCaching):
             p = min(self.lru.keys(), key=lambda k: self.lru[k])
             self.cache_data.pop(p)
             self.lru.pop(p)
-            print("DISCARD", p)
+            print("DISCARD:", p)
         self.cache_data[key] = item
         self.lru[key] = self.tmp
         self.tmp += 1

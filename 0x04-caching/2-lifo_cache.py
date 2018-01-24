@@ -25,7 +25,7 @@ class LIFOCache(BaseCaching):
         if(len(self.cache_data) >= self.MAX_ITEMS and key not in self.queue):
             p = self.queue.pop()
             self.cache_data.pop(p)
-            print("DISCARD", p)
+            print("DISCARD:", p)
         self.queue.append(key)
         self.cache_data[key] = item
 

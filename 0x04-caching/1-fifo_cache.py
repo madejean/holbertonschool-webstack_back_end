@@ -27,7 +27,7 @@ class FIFOCache(BaseCaching):
             first_item = self.queue[0]
             self.cache_data.pop(first_item)
             self.queue.pop(0)
-            print("DISCARD", first_item)
+            print("DISCARD:", first_item)
 
     def get(self, key):
         """ retrieves the value linked to the key """

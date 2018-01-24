@@ -27,7 +27,7 @@ class MRUCache(BaseCaching):
             p = max(self.mru.keys(), key=lambda k: self.mru[k])
             self.cache_data.pop(p)
             self.mru.pop(p)
-            print("DISCARD", p)
+            print("DISCARD:", p)
         self.cache_data[key] = item
         self.mru[key] = self.tmp
         self.tmp += 1
