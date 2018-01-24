@@ -13,7 +13,7 @@ class LRUCache(BaseCaching):
     def __init__(self):
         """ defines overloading method """
         super().__init__()
-        self.tmp = 0
+        self.count = 0
         self.lru = {}
 
     def put(self, key, item):
@@ -30,13 +30,13 @@ class LRUCache(BaseCaching):
             self.lru.pop(p)
             print("DISCARD:", p)
         self.cache_data[key] = item
-        self.lru[key] = self.tmp
-        self.tmp += 1
+        self.lru[key] = self.count
+        self.i += 1
 
     def get(self, key):
         """ retrieves the value linked to the key """
         if key is None or key not in self.cache_data:
             return None
-        self.lru[key] = self.tmp
-        self.tmp += 1
+        self.lru[key] = self.count
+        self.count += 1
         return self.cache_data[key]

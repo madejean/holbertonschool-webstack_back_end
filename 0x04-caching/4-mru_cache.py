@@ -13,7 +13,7 @@ class MRUCache(BaseCaching):
     def __init__(self):
         """ defines overloading method """
         super().__init__()
-        self.tmp = 0
+        self.count = 0
         self.mru = {}
 
     def put(self, key, item):
@@ -29,13 +29,13 @@ class MRUCache(BaseCaching):
             self.mru.pop(p)
             print("DISCARD:", p)
         self.cache_data[key] = item
-        self.mru[key] = self.tmp
-        self.tmp += 1
+        self.mru[key] = self.count
+        self.count += 1
 
     def get(self, key):
         """ retrieves the value linked to the key """
         if key is None or key not in self.cache_data:
             return None
-        self.mru[key] = self.tmp
-        self.tmp += 1
+        self.mru[key] = self.count
+        self.count += 1
         return self.cache_data[key]
