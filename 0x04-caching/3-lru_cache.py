@@ -31,7 +31,7 @@ class LRUCache(BaseCaching):
             print("DISCARD:", p)
         self.cache_data[key] = item
         self.lru[key] = self.count
-        self.i += 1
+        self.count += 1
 
     def get(self, key):
         """ retrieves the value linked to the key """
