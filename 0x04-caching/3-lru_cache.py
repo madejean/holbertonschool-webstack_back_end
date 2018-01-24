@@ -37,4 +37,6 @@ class LRUCache(BaseCaching):
         """ retrieves the value linked to the key """
         if key is None or key not in self.cache_data:
             return None
+        self.lru[key] = self.count
+        self.count += 1
         return self.cache_data[key]
