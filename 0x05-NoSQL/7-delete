@@ -1,0 +1,6 @@
+// deletes all documents with name "Holberton school"
+try {
+    db.school.deleteOne({ "name": "Holberton school" })
+} catch (e) {
+  print(e);
+}
