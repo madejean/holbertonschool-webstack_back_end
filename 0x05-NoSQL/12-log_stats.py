@@ -2,11 +2,8 @@
 """ script that provides some stats about Nginx logs stored in MongoDB """
 from pymongo import MongoClient
 
-
-if __name__ == "__main__":
-    """connection to mongo database and print stats"""
-    client = MongoClient('mongodb://localhost:27017')
-    nginx_collection = client.logs.nginx
+def print_stats(mongo_collection):
+    """prints count"""
     print("{} logs".format(nginx_collection.count()))
     print("Methods:")
     print("\t method GET: {}".format(
@@ -24,3 +21,9 @@ if __name__ == "__main__":
     print("{} status check".format(
         nginx_collection.count({"method": "GET", "path": "/status"})
     ))
+
+if __name__ == "__main__":
+    """connection to mongo database and print stats"""
+    client = MongoClient('mongodb://localhost:27017')
+    nginx_collection = client.logs.nginx
+    print_stats(nginx_collection)
