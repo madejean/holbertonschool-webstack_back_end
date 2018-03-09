@@ -6,16 +6,19 @@ def print_stats(mongo_collection):
     """prints count"""
     print("{} logs".format(nginx_collection.count()))
     print("Methods:")
-    print("\t method GET: {}".format(
+    print("\tmethod GET: {}".format(
         nginx_collection.count({"method": "GET"})
     ))
-    print("\t method POST: {}".format(
+    print("\tmethod POST: {}".format(
         nginx_collection.count({"method": "POST"})
     ))
-    print("\t method PUT: {}".format(
+    print("\tmethod PUT: {}".format(
         nginx_collection.count({"method": "PUT"})
     ))
-    print("\t method PATCH: {}".format(
+    print("\tmethod PATCH: {}".format(
+        nginx_collection.count({"method": "PATCH"})
+    ))
+    print("\tmethod DELETE: {}".format(
         nginx_collection.count({"method": "DELETE"})
     ))
     print("{} status check".format(
