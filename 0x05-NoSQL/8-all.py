@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+
+
 def list_all(mongo_collection):
+    """lists all document in a collection"""
     if mongo_collection.count() is None:
         return []
     else:
