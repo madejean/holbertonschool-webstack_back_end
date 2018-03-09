@@ -2,7 +2,9 @@
 """ script that provides some stats about Nginx logs stored in MongoDB """
 from pymongo import MongoClient
 
+
 if __name__ == "__main__":
+    """connection to mongo database and print stats"""
     client = MongoClient('mongodb://localhost:27017')
     nginx_collection = client.logs.nginx
     print("{} logs".format(nginx_collection.count()))
